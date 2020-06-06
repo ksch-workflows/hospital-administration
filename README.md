@@ -10,7 +10,7 @@ Please refer to the [architecture documentation](https://github.com/ksch-workflo
 
 ## Technologies
 
-The project is getting build the following technologies:
+The project is getting build with the following technologies:
 
 - [AsciiDoctor](https://github.com/ksch-workflows/hospital-administration/wiki/AsciiDoctor) - tool for documentation generation
 - [Dart](https://github.com/ksch-workflows/hospital-administration/wiki/Dart) - programming language used for the frontend
