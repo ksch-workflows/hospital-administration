@@ -1,12 +1,6 @@
 # Hospital Administration
 
-The purpose of this project is to support the administrative work in the Kirpal Sagar Charitable Hospital.
-
-## Architecture
-
-For the basic structure of the source code, the [Hexagonal Architecture](https://github.com/ksch-workflows/hospital-administration/wiki/HexagonalArchitecture) style is being used.
-
-Please refer to the [architecture documentation](https://github.com/ksch-workflows/hospital-administration/wiki/ArchitectureDocumentation) for details.
+The purpose of this project is to support the administrative work in the [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/).
 
 ## Technologies
 
@@ -16,10 +10,9 @@ The project is getting build with the following technologies:
 - [Dart](https://github.com/ksch-workflows/hospital-administration/wiki/Dart) - programming language used for the frontend
 - [Flutter](https://github.com/ksch-workflows/hospital-administration/wiki/Flutter) - framework for the development of mobile and web applications
 - [Gradle](https://github.com/ksch-workflows/ksch-workflows/wiki/Gradle) - used for the compilation of the source code into an executable application  
-- [IntelliJ IDEA](https://github.com/ksch-workflows/ksch-workflows/wiki/IntelliJ) - recommend text editor for Java code
+- [IntelliJ IDEA](https://github.com/ksch-workflows/ksch-workflows/wiki/IntelliJ) - recommend text editor for Java and Dart code
 - [Java](https://github.com/ksch-workflows/hospital-administration/wiki/Java) - programming language used for the backend
 - [Spring](https://github.com/ksch-workflows/hospital-administration/wiki/Spring) - framework for the development of enterprise applications
-- [VS Code](https://github.com/ksch-workflows/ksch-workflows/wiki/Code) - recommend text editor for Dart code
 
 ## Contributing
 
