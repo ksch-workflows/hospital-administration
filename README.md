@@ -2,7 +2,11 @@
 
 The purpose of this project is to support the administrative work in the [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/).
 
-## Technologies
+## Architecture
+
+For details about the technical architecture, please refer the [arc42 documentation](https://docs.google.com/document/d/1We6tpOIF1H0ZE_XljF4qZZHYxsrTh5O_7rko7QVP41Y/edit?usp=sharing).
+
+### Technologies
 
 The project is getting build with the following technologies:
 
@@ -18,7 +22,7 @@ The project is getting build with the following technologies:
 
 If you would like to contribute and have any technical or organisational questions, please write an email to [ksch-workflows@googlegroups.com](mailto:ksch-workflows@googlegroups.com).
 
-## Getting started
+### Getting started
 
 Follow the links [above](#technology) for installation hints for the respective technology.
 
