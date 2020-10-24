@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "ksch-workflows"
+  },
+  "targets": {
+    "ksch-workflows": {
+      "hosting": {
+        "registration": [
+          "ksch-workflows-registration"
+        ]
+      }
+    }
+  }
+}
