@@ -5,24 +5,9 @@ import 'package:registration/activity.dart';
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    Activity(title: "Dashboard", body: null);
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: Text(
-            'Dashboard',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
-            ),
-          ),
-        ),
-        Align(
+    return Activity(
+        title: "Dashboard",
+        body: Align(
           alignment: Alignment.topLeft,
           child: Container(
             padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
@@ -34,8 +19,7 @@ class RegistrationDashboard extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ],
+        )
     );
   }
 }
