@@ -14,8 +14,8 @@ class RegistrationDashboard extends StatelessWidget {
             child: Wrap(
               alignment: WrapAlignment.start,
               children: [
-                TitleButton(icon: Icons.menu_book, title: "Register patient"),
-                TitleButton(icon: Icons.money, title: "Process payment"),
+                TileButton(icon: Icons.menu_book, title: "Register patient"),
+                TileButton(icon: Icons.money, title: "Process payment"),
               ],
             ),
           ),
@@ -24,11 +24,11 @@ class RegistrationDashboard extends StatelessWidget {
   }
 }
 
-class TitleButton extends StatelessWidget {
+class TileButton extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  TitleButton({@required this.icon, @required this.title})
+  TileButton({@required this.icon, @required this.title})
       : assert(icon != null),
         assert(title != null);
 

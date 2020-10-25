@@ -16,41 +16,38 @@ class Activity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Table(
-          columnWidths: {
-            0: FixedColumnWidth(100),
-          },
-          children: [
-            TableRow(
-              children: [
-                backButtonCallback != null
-                    ? IconButton(
-                        icon: Icon(Icons.arrow_back),
-                        onPressed: backButtonCallback,
-                      )
-                    : _EmptyCell(),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35,
-                  ),
+      child: Table(
+        columnWidths: {
+          0: FixedColumnWidth(100),
+        },
+        children: [
+          TableRow(
+            children: [
+              backButtonCallback != null
+                  ? IconButton(
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: backButtonCallback,
+                    )
+                  : _EmptyCell(),
+              Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35,
                 ),
-              ],
-            ),
-            TableRow(
-              children: [
-                _EmptyCell(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
-                  child: body,
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          TableRow(
+            children: [
+              _EmptyCell(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
+                child: body,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
