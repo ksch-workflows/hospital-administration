@@ -17,10 +17,10 @@ class RegistrationDashboard extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
-          child: Align(
-            alignment: Alignment.topLeft,
+        Align(
+          alignment: Alignment.topLeft,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
             child: Wrap(
               alignment: WrapAlignment.start,
               children: [
