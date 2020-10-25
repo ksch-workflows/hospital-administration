@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
@@ -16,15 +17,38 @@ class RegistrationDashboard extends StatelessWidget {
             ),
           ),
         ),
-        Ink(
-          color: Colors.yellow,
-          width: 200.0,
-          height: 100.0,
-          child: InkWell(
-              onTap: () { },
-              child: Center(
-                child: Text('YELLOW'),
-              )
+        Align(
+          alignment: Alignment.topLeft,
+          child: Wrap(
+            alignment: WrapAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                child: Ink(
+                  color: Colors.grey,
+                  width: 200.0,
+                  height: 100.0,
+                  child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                        child: Text('Register patient'),
+                      )),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                child: Ink(
+                  color: Colors.grey,
+                  width: 200.0,
+                  height: 100.0,
+                  child: InkWell(
+                      onTap: () {},
+                      child: Center(
+                        child: Text('Process payment'),
+                      )),
+                ),
+              ),
+            ],
           ),
         ),
       ],
