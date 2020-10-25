@@ -69,3 +69,11 @@ class RegistrationDashboard extends StatelessWidget {
     );
   }
 }
+
+class OpenActivityTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
