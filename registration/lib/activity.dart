@@ -4,12 +4,12 @@ import 'package:registration/test_bench.dart';
 class Activity extends StatelessWidget {
   final String title;
   final Widget body;
-  final Function backButtonCallback;
+  final Function onNavigateBack;
 
   Activity({
     @required this.title,
     @required this.body,
-    this.backButtonCallback,
+    this.onNavigateBack,
   })  : assert(title != null),
         assert(body != null);
 
@@ -24,7 +24,7 @@ class Activity extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              backButtonCallback != null ? _buildBackButton() : _EmptyCell(),
+              onNavigateBack != null ? _buildBackButton() : _EmptyCell(),
               _buildTitleLabel(),
             ],
           ),
@@ -55,7 +55,7 @@ class Activity extends StatelessWidget {
   IconButton _buildBackButton() {
     return IconButton(
       icon: Icon(Icons.arrow_back),
-      onPressed: backButtonCallback,
+      onPressed: onNavigateBack,
     );
   }
 }

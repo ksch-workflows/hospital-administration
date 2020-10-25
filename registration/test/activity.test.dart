@@ -11,7 +11,7 @@ void main() {
       Activity(
         title: "Demo",
         body: Text("Hello, World!"),
-        backButtonCallback: () {
+        onNavigateBack: () {
           callbackExecuted = true;
         },
       ),
