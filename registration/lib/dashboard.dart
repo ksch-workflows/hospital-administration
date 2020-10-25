@@ -17,38 +17,41 @@ class RegistrationDashboard extends StatelessWidget {
             ),
           ),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Wrap(
-            alignment: WrapAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
-                child: Ink(
-                  color: Colors.grey,
-                  width: 200.0,
-                  height: 100.0,
-                  child: InkWell(
-                      onTap: () {},
-                      child: Center(
-                        child: Text('Register patient'),
-                      )),
+        Container(
+          padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Wrap(
+              alignment: WrapAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                  child: Ink(
+                    color: Colors.grey,
+                    width: 200.0,
+                    height: 100.0,
+                    child: InkWell(
+                        onTap: () {},
+                        child: Center(
+                          child: Text('Register patient'),
+                        )),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
-                child: Ink(
-                  color: Colors.grey,
-                  width: 200.0,
-                  height: 100.0,
-                  child: InkWell(
-                      onTap: () {},
-                      child: Center(
-                        child: Text('Process payment'),
-                      )),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(16, 16, 0, 0),
+                  child: Ink(
+                    color: Colors.grey,
+                    width: 200.0,
+                    height: 100.0,
+                    child: InkWell(
+                        onTap: () {},
+                        child: Center(
+                          child: Text('Process payment'),
+                        )),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
