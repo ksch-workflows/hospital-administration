@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:registration/activity.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    Activity(title: "Dashboard", body: null);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
