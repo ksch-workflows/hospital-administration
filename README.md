@@ -26,6 +26,17 @@ If you would like to contribute and have any technical or organisational questio
 
 Follow the links [above](#technology) for installation hints for the respective technology.
 
+## Maintenance
+
+### Create new development release
+
+```
+cd registration 
+flutter build web
+cd ..
+firebase deploy
+```
+
 ## License
 
 The "Hospital Administration" project is maintained by [KS-plus e.V.](https://ks-plus.org/en/welcome/), a non-profit association dedicated to supporting [Kirpal Sagar](https://kirpal-sagar.org/en/welcome/).
