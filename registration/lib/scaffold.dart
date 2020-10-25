@@ -13,14 +13,6 @@ class PageFrame extends StatelessWidget {
   }
 }
 
-class Activity extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-
 class _AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
