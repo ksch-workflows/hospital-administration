@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:registration/test_bench.dart';
 
-class WorkflowScaffold extends StatelessWidget {
+class PageFrame extends StatelessWidget {
   final Widget body;
 
-  WorkflowScaffold({@required this.body}) : assert(body != null);
+  PageFrame({@required this.body}) : assert(body != null);
 
   @override
   Widget build(BuildContext context) {
@@ -58,4 +59,18 @@ class _AppBar extends StatelessWidget {
       ],
     );
   }
+}
+
+void main() {
+  runApp(
+    TestBench(
+      child: PageFrame(
+        body: Row(
+          children: [
+            const Text('Hello, Test Bench!'),
+          ],
+        ),
+      ),
+    ),
+  );
 }

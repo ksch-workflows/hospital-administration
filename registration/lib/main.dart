@@ -7,7 +7,7 @@ void main() {
     MaterialApp(
       title: 'Registration',
       home: Material(
-        child: WorkflowScaffold(
+        child: PageFrame(
           body: RegistrationDashboard(),
         ),
       ),
