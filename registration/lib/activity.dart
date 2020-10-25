@@ -3,42 +3,54 @@ import 'package:flutter/material.dart';
 class Activity extends StatelessWidget {
   final String title;
   final Widget body;
+  final Function backButtonCallback;
 
-  Activity({this.title, this.body})
-      : assert(title != null),
+  Activity({
+    @required this.title,
+    @required this.body,
+    this.backButtonCallback,
+  })  : assert(title != null),
         assert(body != null);
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
-      child: Table(
-        columnWidths: {
-          0: FixedColumnWidth(100),
-        },
-        children: [
-          TableRow(
-            children: [
-              Icon(Icons.arrow_back, size: 40),
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Table(
+          columnWidths: {
+            0: FixedColumnWidth(100),
+          },
+          children: [
+            TableRow(
+              children: [
+                backButtonCallback != null
+                    ? IconButton(
+                        icon: Icon(Icons.arrow_back),
+                        onPressed: backButtonCallback,
+                      )
+                    : _EmptyCell(),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          TableRow(
-            children: [
-              _EmptyCell(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
-                child: body,
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+            TableRow(
+              children: [
+                _EmptyCell(),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
+                  child: body,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

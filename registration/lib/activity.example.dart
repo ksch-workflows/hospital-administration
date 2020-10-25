@@ -9,6 +9,7 @@ void main() {
       child: Activity(
         title: "Demo",
         body: Text("Hello, World!"),
+        backButtonCallback: () => print("TODO: Navigate to previous screen."),
       ),
     ),
   );
