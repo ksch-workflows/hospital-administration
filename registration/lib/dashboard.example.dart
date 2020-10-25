@@ -6,7 +6,7 @@ import 'test_bench.dart';
 void main() {
   runApp(
     TestBench(
-      RegistrationDashboard()
+      child: RegistrationDashboard(),
     ),
   );
 }

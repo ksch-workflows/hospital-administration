@@ -6,7 +6,7 @@ import 'test_bench.dart';
 void main() {
   runApp(
     TestBench(
-      WorkflowScaffold(
+      child: PageFrame(
         body: Row(
           children: [
             const Text('Hello, Test Bench!'),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class WorkflowScaffold extends StatelessWidget {
+class PageFrame extends StatelessWidget {
   final Widget body;
 
-  WorkflowScaffold({@required this.body}) : assert(body != null);
+  PageFrame({@required this.body}) : assert(body != null);
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +12,14 @@ class WorkflowScaffold extends StatelessWidget {
     );
   }
 }
+
+class Activity extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 
 class _AppBar extends StatelessWidget {
   @override

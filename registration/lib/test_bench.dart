@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TestBench extends StatelessWidget {
-  final Widget testSubject;
+  final Widget child;
 
-  TestBench(this.testSubject) : assert(testSubject != null);
+  TestBench({this.child}) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class TestBench extends StatelessWidget {
                 border: Border.all(color: Colors.black)
             ),
             child: Center(
-              child: testSubject,
+              child: child,
             ),
           ),
         ),
