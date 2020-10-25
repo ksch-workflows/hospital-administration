@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:registration/activity.dart';
+import 'package:registration/test_bench.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
@@ -62,3 +63,12 @@ class TileButton extends StatelessWidget {
     );
   }
 }
+
+void main() {
+  runApp(
+    TestBench(
+      child: RegistrationDashboard(),
+    ),
+  );
+}
+

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registration/test_bench.dart';
 
 class PageFrame extends StatelessWidget {
   final Widget body;
@@ -58,4 +59,18 @@ class _AppBar extends StatelessWidget {
       ],
     );
   }
+}
+
+void main() {
+  runApp(
+    TestBench(
+      child: PageFrame(
+        body: Row(
+          children: [
+            const Text('Hello, Test Bench!'),
+          ],
+        ),
+      ),
+    ),
+  );
 }

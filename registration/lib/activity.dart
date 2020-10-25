@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registration/test_bench.dart';
 
 class Activity extends StatelessWidget {
   final String title;
@@ -23,19 +24,8 @@ class Activity extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              backButtonCallback != null
-                  ? IconButton(
-                      icon: Icon(Icons.arrow_back),
-                      onPressed: backButtonCallback,
-                    )
-                  : _EmptyCell(),
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
-                ),
-              ),
+              backButtonCallback != null ? _buildBackButton() : _EmptyCell(),
+              _buildTitleLabel(),
             ],
           ),
           TableRow(
@@ -51,6 +41,23 @@ class Activity extends StatelessWidget {
       ),
     );
   }
+
+  Text _buildTitleLabel() {
+    return Text(
+      title,
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 35,
+      ),
+    );
+  }
+
+  IconButton _buildBackButton() {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: backButtonCallback,
+    );
+  }
 }
 
 /// Widget which does nothing but filling a slot in the table.
@@ -60,3 +67,15 @@ class _EmptyCell extends StatelessWidget {
     return Container();
   }
 }
+
+void main() {
+  runApp(
+    TestBench(
+      child: Activity(
+        title: "Demo",
+        body: Text("Hello, World!!"),
+      ),
+    ),
+  );
+}
+
