@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class KschWorkflowsScaffold extends StatelessWidget {
+class WorkflowScaffold extends StatelessWidget {
   final Widget body;
 
-  KschWorkflowsScaffold({@required this.body}) : assert(body != null);
+  WorkflowScaffold({@required this.body}) : assert(body != null);
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +16,44 @@ class KschWorkflowsScaffold extends StatelessWidget {
 class _AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final appBarColor = Theme.of(context).primaryColor;
+    final buttonColor = Theme.of(context).buttonColor;
+
+    return Container(
+      color: appBarColor,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _homeButton(buttonColor),
+          _actionButtons(buttonColor),
+        ],
+      ),
+    );
+  }
+
+  IconButton _homeButton(Color color) {
+    return IconButton(
+      icon: Icon(Icons.home, color: color),
+      onPressed: () => print("TODO: Navigate to home screen"),
+    );
+  }
+
+  Row _actionButtons(Color color) {
     return Row(
       children: [
-        Icon(
-          Icons.home,
+        IconButton(
+          icon: Icon(
+            Icons.settings,
+            color: color,
+          ),
+          onPressed: () => print("TODO: Open settings dialog"),
         ),
-        Icon(
-          Icons.settings,
-        ),
-        Icon(
-          Icons.logout,
+        IconButton(
+          icon: Icon(
+            Icons.logout,
+            color: color,
+          ),
+          onPressed: () => print("TODO: Trigger logout"),
         ),
       ],
     );

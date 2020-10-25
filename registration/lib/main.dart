@@ -7,7 +7,7 @@ void main() {
     MaterialApp(
       title: 'Registration',
       home: Material(
-        child: KschWorkflowsScaffold(
+        child: WorkflowScaffold(
           body: RegistrationDashboard(),
         ),
       ),

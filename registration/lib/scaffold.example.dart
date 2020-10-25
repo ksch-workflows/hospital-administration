@@ -6,7 +6,7 @@ import 'test_bench.dart';
 void main() {
   runApp(
     TestBench(
-      KschWorkflowsScaffold(
+      WorkflowScaffold(
         body: Row(
           children: [
             const Text('Hello, Test Bench!'),

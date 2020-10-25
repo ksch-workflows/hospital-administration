@@ -13,8 +13,16 @@ class TestBench extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Test Bench'),
         ),
-        body: Center(
-          child: testSubject,
+        body: Padding(
+          padding: EdgeInsets.all(100.0),
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black)
+            ),
+            child: Center(
+              child: testSubject,
+            ),
+          ),
         ),
       ),
     );
