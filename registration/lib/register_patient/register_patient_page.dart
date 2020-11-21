@@ -34,17 +34,28 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return Activity(
       title: "Register patient",
       onNavigateBack: () {},
-      body: Column(
-        children: [
-          buildActionRow(),
-          Row(
+      body: SizedBox(
+        height: 400,
+
+        child: Scaffold(
+          body: Column(
             children: [
-              Expanded(
-                child: buildPatientTable(),
-              )
+              buildActionRow(),
+              Row(
+                children: [
+                  Expanded(
+                    child: buildPatientTable(),
+                  )
+                ],
+              ),
             ],
           ),
-        ],
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            tooltip: 'Add new patient',
+            child: const Icon(Icons.add),
+          ),
+        ),
       ),
     );
   }
@@ -86,31 +97,29 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RaisedButton(
-          child: const Text("New patient"),
-          onPressed: () {},
-        ),
-        Container(
-          width: 200,
-          child: TextField(
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: "Search patient...",
-              suffixIcon: Container(
-                child: Icon(Icons.search),
+        Expanded(
+          child: Container(
+            width: 200,
+            child: TextField(
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: "Search patient...",
+                suffixIcon: Container(
+                  child: Icon(Icons.search),
+                ),
               ),
+              onChanged: (String value) {
+                setState(() {
+                  var normalizedValue = value.trim().toLowerCase();
+                  if (normalizedValue.isEmpty) {
+                    matchingPatients = [];
+                  } else {
+                    matchingPatients =
+                        kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                  }
+                });
+              },
             ),
-            onChanged: (String value) {
-              setState(() {
-                var normalizedValue = value.trim().toLowerCase();
-                if (normalizedValue.isEmpty) {
-                  matchingPatients = [];
-                } else {
-                  matchingPatients =
-                      kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
-                }
-              });
-            },
           ),
         )
       ],
