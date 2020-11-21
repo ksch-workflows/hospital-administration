@@ -151,19 +151,16 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   child: Icon(Icons.search),
                 ),
               ),
-              onChanged: (String value) async {
-                Future.delayed(Duration(seconds: 1), () {
-                  setState(() {
-                    var normalizedValue = value.trim().toLowerCase();
-                    if (normalizedValue.isEmpty) {
-                      matchingPatients = [];
-                    } else {
-                      matchingPatients =
-                          kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
-                    }
-                  });
+              onChanged: (String value) {
+                setState(() {
+                  var normalizedValue = value.trim().toLowerCase();
+                  if (normalizedValue.isEmpty) {
+                    matchingPatients = [];
+                  } else {
+                    matchingPatients =
+                        kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                  }
                 });
-
               },
             ),
           ),
