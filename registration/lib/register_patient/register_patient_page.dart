@@ -56,6 +56,8 @@ class RegisterPatientPage extends StatefulWidget {
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient> matchingPatients = [];
 
+  final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Activity(
@@ -88,22 +90,36 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     if (matchingPatients.isEmpty) {
       return Container();
     }
-    return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Text("OPD No."),
+    return Scrollbar(
+      isAlwaysShown: true,
+      thickness: 8,
+      controller: scrollController,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: 200,
         ),
-        DataColumn(
-          label: Text("Name"),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          controller: scrollController,
+          child: DataTable(
+            columns: const <DataColumn>[
+              DataColumn(
+                label: Text("OPD No."),
+              ),
+              DataColumn(
+                label: Text("Name"),
+              ),
+              DataColumn(
+                label: Text("Location"),
+              ),
+              DataColumn(
+                label: Text("Last visit"),
+              ),
+            ],
+            rows: buildTableRows(),
+          ),
         ),
-        DataColumn(
-          label: Text("Location"),
-        ),
-        DataColumn(
-          label: Text("Last visit"),
-        ),
-      ],
-      rows: buildTableRows(),
+      ),
     );
   }
 
@@ -135,16 +151,19 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   child: Icon(Icons.search),
                 ),
               ),
-              onChanged: (String value) {
-                setState(() {
-                  var normalizedValue = value.trim().toLowerCase();
-                  if (normalizedValue.isEmpty) {
-                    matchingPatients = [];
-                  } else {
-                    matchingPatients =
-                        kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
-                  }
+              onChanged: (String value) async {
+                Future.delayed(Duration(seconds: 1), () {
+                  setState(() {
+                    var normalizedValue = value.trim().toLowerCase();
+                    if (normalizedValue.isEmpty) {
+                      matchingPatients = [];
+                    } else {
+                      matchingPatients =
+                          kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                    }
+                  });
                 });
+
               },
             ),
           ),
