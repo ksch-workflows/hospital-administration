@@ -4,28 +4,30 @@ import "package:registration/register_patient/model/patient.dart";
 import "package:registration/test_bench.dart";
 import "package:uuid/uuid.dart";
 
+final List<Patient> kAllPatients = [
+  Patient(
+    id: Uuid().v4().toString(),
+    opdNumber: "10-1002",
+    name: "John Doe",
+    location: "Guesthouse",
+    lastVisit: DateTime.now(),
+  ),
+  Patient(
+    id: Uuid().v4().toString(),
+    opdNumber: "10-2001",
+    name: "Jane Doe",
+    location: "Academy",
+    lastVisit: DateTime.now(),
+  ),
+];
+
 class RegisterPatientPage extends StatefulWidget {
   @override
   _RegisterPatientPageState createState() => _RegisterPatientPageState();
 }
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
-  final List<Patient> patients = [
-    Patient(
-      id: Uuid().v4().toString(),
-      opdNumber: "10-1002",
-      name: "John Doe",
-      location: "Guesthouse",
-      lastVisit: DateTime.now(),
-    ),
-    Patient(
-      id: Uuid().v4().toString(),
-      opdNumber: "10-2001",
-      name: "Jane Doe",
-      location: "Academy",
-      lastVisit: DateTime.now(),
-    ),
-  ];
+  List<Patient> matchingPatients = [];
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   List<DataRow> buildTableRows() {
-    return patients
+    return matchingPatients
         .map((e) => DataRow(
               cells: [
                 DataCell(Text(e.opdNumber)),
@@ -98,6 +100,17 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 child: Icon(Icons.search),
               ),
             ),
+            onChanged: (String value) {
+              setState(() {
+                var normalizedValue = value.trim().toLowerCase();
+                if (normalizedValue.isEmpty) {
+                  matchingPatients = [];
+                } else {
+                  matchingPatients =
+                      kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                }
+              });
+            },
           ),
         )
       ],
