@@ -29,13 +29,68 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 child: const Text("New patient"),
                 onPressed: () {},
               ),
-              RaisedButton(
-                child: const Text("Search patient"),
-              ),
+              Container(
+                width: 200,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    hintText: "Search patient...",
+                    suffixIcon: Container(
+                      child: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
           Row(
-            children: [],
+            children: [
+              DataTable(
+                columns: const <DataColumn>[
+                  DataColumn(
+                    label: Text(
+                      'Name',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Age',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Role',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+                rows: const <DataRow>[
+                  DataRow(
+                    cells: <DataCell>[
+                      DataCell(Text('Sarah')),
+                      DataCell(Text('19')),
+                      DataCell(Text('Student')),
+                    ],
+                  ),
+                  DataRow(
+                    cells: <DataCell>[
+                      DataCell(Text('Janine')),
+                      DataCell(Text('43')),
+                      DataCell(Text('Professor')),
+                    ],
+                  ),
+                  DataRow(
+                    cells: <DataCell>[
+                      DataCell(Text('William')),
+                      DataCell(Text('27')),
+                      DataCell(Text('Associate Professor')),
+                    ],
+                  ),
+                ],
+              )
+            ],
           ),
         ],
       ),
