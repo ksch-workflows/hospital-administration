@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:registration/activity.dart';
-import 'package:registration/register_patient/model/patient.dart';
-import 'package:registration/test_bench.dart';
-import 'package:uuid/uuid.dart';
+import "package:flutter/material.dart";
+import "package:registration/activity.dart";
+import "package:registration/register_patient/model/patient.dart";
+import "package:registration/test_bench.dart";
+import "package:uuid/uuid.dart";
 
 class RegisterPatientPage extends StatefulWidget {
   @override
@@ -22,80 +22,93 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       onNavigateBack: () {},
       body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RaisedButton(
-                child: const Text("New patient"),
-                onPressed: () {},
-              ),
-              Container(
-                width: 200,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: "Search patient...",
-                    suffixIcon: Container(
-                      child: Icon(Icons.search),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
+          buildActionRow(),
           Row(
             children: [
               Expanded(
-                child: DataTable(
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text(
-                        'Name',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Age',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Role',
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                  ],
-                  rows: const <DataRow>[
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text('Sarah')),
-                        DataCell(Text('19')),
-                        DataCell(Text('Student')),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text('Janine')),
-                        DataCell(Text('43')),
-                        DataCell(Text('Professor')),
-                      ],
-                    ),
-                    DataRow(
-                      cells: <DataCell>[
-                        DataCell(Text('William')),
-                        DataCell(Text('27')),
-                        DataCell(Text('Associate Professor')),
-                      ],
-                    ),
-                  ],
-                ),
+                child: buildPatientTable(),
               )
             ],
           ),
         ],
       ),
+    );
+  }
+
+  DataTable buildPatientTable() {
+    return DataTable(
+      columns: const <DataColumn>[
+        DataColumn(
+          label: Text(
+            "No.",
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            "Name",
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            "Location",
+          ),
+        ),
+        DataColumn(
+          label: Text(
+            "Last visit",
+          ),
+        ),        
+      ],
+      rows: <DataRow>[
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text("Sarah")),
+            DataCell(Text("19")),
+            DataCell(Text("Student")),
+            DataCell(Text(DateTime.now().toString())),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text("Janine")),
+            DataCell(Text("43")),
+            DataCell(Text("Professor")),
+            DataCell(Text(DateTime.now().toString())),
+          ],
+        ),
+        DataRow(
+          cells: <DataCell>[
+            DataCell(Text("William")),
+            DataCell(Text("27")),
+            DataCell(Text("Associate Professor")),
+            DataCell(Text(DateTime.now().toString())),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Row buildActionRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        RaisedButton(
+          child: const Text("New patient"),
+          onPressed: () {},
+        ),
+        Container(
+          width: 200,
+          child: TextField(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: "Search patient...",
+              suffixIcon: Container(
+                child: Icon(Icons.search),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
