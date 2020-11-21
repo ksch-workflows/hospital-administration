@@ -60,7 +60,10 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     );
   }
 
-  DataTable buildPatientTable() {
+  Widget buildPatientTable() {
+    if (matchingPatients.isEmpty) {
+      return Container();
+    }
     return DataTable(
       columns: const <DataColumn>[
         DataColumn(
