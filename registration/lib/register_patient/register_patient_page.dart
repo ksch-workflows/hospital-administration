@@ -11,8 +11,20 @@ class RegisterPatientPage extends StatefulWidget {
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
   final List<Patient> patients = [
-    Patient(id: Uuid().v4().toString(), name: "John Doe", location: "Guesthouse", lastVisit: DateTime.now()),
-    Patient(id: Uuid().v4().toString(), name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
+    Patient(
+      id: Uuid().v4().toString(),
+      opdNumber: "10-1002",
+      name: "John Doe",
+      location: "Guesthouse",
+      lastVisit: DateTime.now(),
+    ),
+    Patient(
+      id: Uuid().v4().toString(),
+      opdNumber: "10-2001",
+      name: "Jane Doe",
+      location: "Academy",
+      lastVisit: DateTime.now(),
+    ),
   ];
 
   @override
@@ -39,53 +51,33 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return DataTable(
       columns: const <DataColumn>[
         DataColumn(
-          label: Text(
-            "No.",
-          ),
+          label: Text("OPD No."),
         ),
         DataColumn(
-          label: Text(
-            "Name",
-          ),
+          label: Text("Name"),
         ),
         DataColumn(
-          label: Text(
-            "Location",
-          ),
+          label: Text("Location"),
         ),
         DataColumn(
-          label: Text(
-            "Last visit",
-          ),
-        ),        
-      ],
-      rows: <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text("Sarah")),
-            DataCell(Text("19")),
-            DataCell(Text("Student")),
-            DataCell(Text(DateTime.now().toString())),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text("Janine")),
-            DataCell(Text("43")),
-            DataCell(Text("Professor")),
-            DataCell(Text(DateTime.now().toString())),
-          ],
-        ),
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text("William")),
-            DataCell(Text("27")),
-            DataCell(Text("Associate Professor")),
-            DataCell(Text(DateTime.now().toString())),
-          ],
+          label: Text("Last visit"),
         ),
       ],
+      rows: buildTableRows(),
     );
+  }
+
+  List<DataRow> buildTableRows() {
+    return patients
+        .map((e) => DataRow(
+              cells: [
+                DataCell(Text(e.opdNumber)),
+                DataCell(Text(e.name)),
+                DataCell(Text(e.location)),
+                DataCell(Text(e.lastVisit.toString())),
+              ],
+            ))
+        .toList();
   }
 
   Row buildActionRow() {
