@@ -34,27 +34,24 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     return Activity(
       title: "Register patient",
       onNavigateBack: () {},
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Add new patient',
+        child: const Icon(Icons.add),
+      ),
       body: SizedBox(
         height: 400,
-
-        child: Scaffold(
-          body: Column(
-            children: [
-              buildActionRow(),
-              Row(
-                children: [
-                  Expanded(
-                    child: buildPatientTable(),
-                  )
-                ],
-              ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            tooltip: 'Add new patient',
-            child: const Icon(Icons.add),
-          ),
+        child: Column(
+          children: [
+            buildActionRow(),
+            Row(
+              children: [
+                Expanded(
+                  child: buildPatientTable(),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );

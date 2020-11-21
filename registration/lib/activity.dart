@@ -5,39 +5,50 @@ class Activity extends StatelessWidget {
   final String title;
   final Widget body;
   final Function onNavigateBack;
+  final Widget floatingActionButton;
 
   Activity({
     @required this.title,
     @required this.body,
     this.onNavigateBack,
+    this.floatingActionButton,
   })  : assert(title != null),
         assert(body != null);
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: Table(
-        columnWidths: {
-          0: FixedColumnWidth(100),
-        },
-        children: [
-          TableRow(
+
+    
+
+    return Container(
+      height: 500,
+      child: Scaffold(
+        body: Align(
+          alignment: Alignment.topLeft,
+          child: Table(
+            columnWidths: {
+              0: FixedColumnWidth(100),
+            },
             children: [
-              onNavigateBack != null ? _buildBackButton() : _EmptyCell(),
-              _buildTitleLabel(),
-            ],
-          ),
-          TableRow(
-            children: [
-              _EmptyCell(),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
-                child: body,
+              TableRow(
+                children: [
+                  onNavigateBack != null ? _buildBackButton() : _EmptyCell(),
+                  _buildTitleLabel(),
+                ],
+              ),
+              TableRow(
+                children: [
+                  _EmptyCell(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
+                    child: body,
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
+        floatingActionButton: floatingActionButton,
       ),
     );
   }
