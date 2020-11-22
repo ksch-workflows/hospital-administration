@@ -29,13 +29,14 @@ class Activity extends StatelessWidget {
             children: [
               TableRow(
                 children: [
-                  onNavigateBack != null ? _buildBackButton() : _EmptyCell(),
-                  _buildTitleLabel(),
-                ],
-              ),
-              TableRow(
-                children: [
-                  _EmptyCell(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: FloatingActionButton(
+                      onPressed: () {},
+                      tooltip: 'Add new patient',
+                      child: const Icon(Icons.add),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
                     child: body,

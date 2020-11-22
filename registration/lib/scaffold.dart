@@ -9,9 +9,27 @@ class PageFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Column(
-        children: [_AppBar(), body],
-      ),
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        return Stack(
+          children: [
+            Column(
+              children: [_AppBar(), body],
+            ),
+            ConstrainedBox(
+              constraints: constraints,
+              child: Column(
+                children: [
+                  Expanded(child: Container()),
+                  Container(
+                    height: 75,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
@@ -27,7 +45,7 @@ class _AppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _homeButton(buttonColor),
+          _navigationWidgets(buttonColor),
           _actionButtons(buttonColor),
         ],
       ),
@@ -38,6 +56,30 @@ class _AppBar extends StatelessWidget {
     return IconButton(
       icon: Icon(Icons.home, color: color),
       onPressed: () => print("TODO: Navigate to home screen"),
+    );
+  }
+
+  Row _navigationWidgets(Color buttonColor) {
+    return Row(
+      children: [
+        _homeButton(buttonColor),
+        IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: buttonColor,
+          onPressed: () {},
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Text(
+            "Register patient",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+            ),
+          ),
+        )
+      ],
     );
   }
 

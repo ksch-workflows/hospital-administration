@@ -65,11 +65,6 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       body: Activity(
         title: "Register patient",
         onNavigateBack: () {},
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Add new patient',
-          child: const Icon(Icons.add),
-        ),
         body: SizedBox(
           height: 400,
           child: Column(
