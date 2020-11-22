@@ -21,11 +21,11 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       title: "Register patient",
       body: Column(
         children: [
-          buildActionRow(),
+          _buildActionRow(),
           SizedBox(height: 25),
           Flexible(child: Row(
             children: [
-              Expanded(child: Container(child: buildPatientTable())),
+              Expanded(child: Container(child: _buildPatientTable())),
             ],
           ),),
         ],
@@ -41,7 +41,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     );
   }
 
-  Widget buildPatientTable() {
+  Widget _buildPatientTable() {
     if (matchingPatients == null) {
       return Container();
     }
@@ -71,13 +71,13 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
               label: Text("Last visit"),
             ),
           ],
-          rows: buildTableRows(),
+          rows: _buildTableRows(),
         ),
       ),
     );
   }
 
-  List<DataRow> buildTableRows() {
+  List<DataRow> _buildTableRows() {
     return matchingPatients
         .map((e) => DataRow(
               cells: [
@@ -90,7 +90,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         .toList();
   }
 
-  Row buildActionRow() {
+  Row _buildActionRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

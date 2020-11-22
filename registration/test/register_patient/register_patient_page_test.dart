@@ -9,7 +9,7 @@ void main() {
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
-      isFullPage: false,
+      isFullPage: true,
     ));
     var patientSearchInputField = find.byType(TextField);
 

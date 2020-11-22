@@ -32,29 +32,33 @@ class WebScaffold extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 100,
-                    child: floatingActionButton,
-                  ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxHeight: constraints.maxHeight - 145,
-                      maxWidth: constraints.maxWidth - 200,
-                    ),
-                    child: body,
-                  ),
-                  SizedBox(
-                    width: 100,
-                  ),
-                ],
-              )
+              _buildBodyWrapper(constraints)
             ],
           ),
         );
       }),
+    );
+  }
+
+  Row _buildBodyWrapper(BoxConstraints constraints) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 100,
+          child: floatingActionButton,
+        ),
+        ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: constraints.maxHeight - 145,
+            maxWidth: constraints.maxWidth - 200,
+          ),
+          child: body,
+        ),
+        SizedBox(
+          width: 100,
+        ),
+      ],
     );
   }
 }
