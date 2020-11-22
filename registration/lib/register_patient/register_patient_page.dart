@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:registration/activity.dart";
 import "package:registration/register_patient/model/patient.dart";
 import 'package:registration/scaffold.dart';
 import "package:registration/test_bench.dart";
@@ -80,7 +79,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        tooltip: 'Add new patient',
+        tooltip: "Add new patient",
         child: const Icon(Icons.add),
       ),
     );
@@ -90,8 +89,6 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     if (matchingPatients.isEmpty) {
       return Container();
     }
-
-    var c = Container();
 
     return Scrollbar(
       isAlwaysShown: true,
