@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:registration/register_patient/register_patient_page.dart';
+import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
 import 'package:registration/test_bench.dart';
 
@@ -60,7 +61,7 @@ class TileButton extends StatelessWidget {
           ),
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPatientPage()));
+          Navigator.push(context, WebPageRoute(builder: (context) => RegisterPatientPage()));
         },
       ),
     );

@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+import 'package:registration/dashboard.dart';
 import "package:registration/register_patient/model/patient.dart";
+import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
 import "package:registration/test_bench.dart";
 
@@ -28,6 +30,9 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           ),),
         ],
       ),
+      onNavigateBack: () {
+        Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
+      },
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: "Add new patient",

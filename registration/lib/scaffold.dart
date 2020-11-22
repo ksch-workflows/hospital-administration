@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:registration/dashboard.dart';
+import 'package:registration/routing.dart';
 import 'package:registration/test_bench.dart';
 
 class WebScaffold extends StatelessWidget {
@@ -18,19 +20,21 @@ class WebScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            height: constraints.maxHeight,
-            child: Column(
-              children: [
-                _AppBar(title: title,),
-                SizedBox(
-                  height: 50,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Container(
+          height: constraints.maxHeight,
+          child: Column(
+            children: [
+              _AppBar(
+                title: title,
+                onNavigateBack: onNavigateBack,
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Container(
                     width: 100,
                     child: floatingActionButton,
@@ -45,20 +49,24 @@ class WebScaffold extends StatelessWidget {
                   SizedBox(
                     width: 100,
                   ),
-                ],)
-              ],
-            ),
-          );
-        }
-      ),
+                ],
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 }
 
 class _AppBar extends StatelessWidget {
   final String title;
+  final Function onNavigateBack;
 
-  _AppBar({@required this.title}) : assert(title != null);
+  _AppBar({
+    @required this.title,
+    this.onNavigateBack,
+  }) : assert(title != null);
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +79,32 @@ class _AppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _navigationWidgets(buttonColor),
+          _navigationWidgets(context, buttonColor),
           _actionButtons(buttonColor),
         ],
       ),
     );
   }
 
-  IconButton _homeButton(Color color) {
+  IconButton _homeButton(BuildContext context, Color color) {
     return IconButton(
       icon: Icon(Icons.home, color: color),
-      onPressed: () => print("TODO: Navigate to home screen"),
+      onPressed: () => Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard())),
     );
   }
 
-  Row _navigationWidgets(Color buttonColor) {
+  Row _navigationWidgets(BuildContext context, Color buttonColor) {
     return Row(
       children: [
-        _homeButton(buttonColor),
-        IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: buttonColor,
-          onPressed: () {},
-        ),
+        _homeButton(context, buttonColor),
+        _backButton(buttonColor),
         Padding(
           padding: EdgeInsets.only(left: 20),
           child: Text(
             title,
             style: TextStyle(
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              //fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
           ),
@@ -128,6 +132,20 @@ class _AppBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Widget _backButton(Color buttonColor) {
+    if (onNavigateBack != null) {
+      return IconButton(
+        icon: Icon(Icons.arrow_back),
+        color: buttonColor,
+        onPressed: onNavigateBack,
+      );
+    } else {
+      return SizedBox(
+        width: 40,
+      );
+    }
   }
 }
 
