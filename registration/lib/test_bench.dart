@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class TestBench extends StatelessWidget {
   final Widget child;
   final bool isFullPage;
+  final Size pageSize;
 
-  TestBench({this.child, this.isFullPage = false}) : assert(child != null);
+  TestBench({this.child, this.isFullPage = false, this.pageSize}) : assert(child != null);
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,18 @@ class TestBench extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(100.0),
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black)
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: 800,
+            maxHeight: 600,
           ),
-          child: Center(
-            child: child,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black)
+            ),
+            child: Center(
+              child: child,
+            ),
           ),
         ),
       ),
