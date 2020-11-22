@@ -61,12 +61,15 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           scrollDirection: Axis.vertical,
           controller: scrollController,
           child: DataTable(
-            columns: const <DataColumn>[
+            columns: <DataColumn>[
               DataColumn(
                 label: Text("OPD No."),
               ),
               DataColumn(
-                label: Text("Name"),
+                label: Container(
+                  child: Text("Name"),
+                  width: 400,
+                ),
               ),
               DataColumn(
                 label: Text("Location"),
