@@ -12,6 +12,7 @@ class TestBench extends StatelessWidget {
     return MaterialApp(
       title: 'Test Bench',
       home: isFullPage ? child : wrapComponentInScaffold(),
+      theme: ThemeData(fontFamily: "Roboto"),
     );
   }
 

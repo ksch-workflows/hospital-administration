@@ -14,9 +14,7 @@ import 'package:registration/test_bench.dart';
 
 void main() {
   testWidgets('Should show search results', (WidgetTester tester) async {
-    // // tester.binding.window.physicalSizeTestValue = Size(2001, 2000);
-    // // tester.binding.window.devicePixelRatioTestValue = 1;
-    tester.binding.window.textScaleFactorTestValue = 0.1;
+    tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
       child: RegisterPatientPage(),
