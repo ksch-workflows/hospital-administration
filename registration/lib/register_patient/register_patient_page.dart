@@ -47,7 +47,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     }
 
     return Scrollbar(
-      isAlwaysShown: true,
+      isAlwaysShown: matchingPatients.length > 7,
       thickness: 8,
       controller: scrollController,
       child: ConstrainedBox(
