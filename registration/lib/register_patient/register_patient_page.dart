@@ -2,51 +2,6 @@ import "package:flutter/material.dart";
 import "package:registration/register_patient/model/patient.dart";
 import 'package:registration/scaffold.dart';
 import "package:registration/test_bench.dart";
-import "package:uuid/uuid.dart";
-
-final List<Patient> kAllPatients = [
-  Patient(
-    id: Uuid().v4().toString(),
-    opdNumber: "10-1002",
-    name: "John Doe",
-    location: "Guesthouse",
-    lastVisit: DateTime.now(),
-  ),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-  Patient(id: Uuid().v4().toString(), opdNumber: "10-2001", name: "Jane Doe", location: "Academy", lastVisit: DateTime.now()),
-];
 
 class RegisterPatientPage extends StatefulWidget {
   @override
