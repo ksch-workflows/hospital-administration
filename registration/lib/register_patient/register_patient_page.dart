@@ -21,13 +21,11 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         children: [
           buildActionRow(),
           SizedBox(height: 25),
-          Row(
+          Flexible(child: Row(
             children: [
-              Expanded(
-                child: buildPatientTable(),
-              )
+              Expanded(child: Container(child: buildPatientTable())),
             ],
-          ),
+          ),),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -50,33 +48,25 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       isAlwaysShown: matchingPatients.length > 7,
       thickness: 8,
       controller: scrollController,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: 400,
-        ),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          controller: scrollController,
-          child: DataTable(
-            columns: <DataColumn>[
-              DataColumn(
-                label: Text("OPD No."),
-              ),
-              DataColumn(
-                label: Container(
-                  child: Text("Name"),
-                  width: 400,
-                ),
-              ),
-              DataColumn(
-                label: Text("Location"),
-              ),
-              DataColumn(
-                label: Text("Last visit"),
-              ),
-            ],
-            rows: buildTableRows(),
-          ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        controller: scrollController,
+        child: DataTable(
+          columns: <DataColumn>[
+            DataColumn(
+              label: Text("OPD No."),
+            ),
+            DataColumn(
+              label: Text("Name"),
+            ),
+            DataColumn(
+              label: Text("Location"),
+            ),
+            DataColumn(
+              label: Text("Last visit"),
+            ),
+          ],
+          rows: buildTableRows(),
         ),
       ),
     );

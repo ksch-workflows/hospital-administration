@@ -18,25 +18,38 @@ class WebScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Column(
-        children: [
-          _AppBar(title: title,),
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            Container(
-              width: 100,
-              child: floatingActionButton,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            height: constraints.maxHeight,
+            child: Column(
+              children: [
+                _AppBar(title: title,),
+                SizedBox(
+                  height: 50,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Container(
+                    width: 100,
+                    child: floatingActionButton,
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: constraints.maxHeight - 145,
+                      maxWidth: constraints.maxWidth - 200,
+                    ),
+                    child: body,
+                  ),
+                  SizedBox(
+                    width: 100,
+                  ),
+                ],)
+              ],
             ),
-            Expanded(child: body),
-            SizedBox(
-              width: 100,
-            )
-          ],)
-        ],
+          );
+        }
       ),
     );
   }
