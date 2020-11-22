@@ -17,21 +17,18 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   Widget build(BuildContext context) {
     return WebScaffold(
       title: "Register patient",
-      body: SizedBox(
-        height: 400,
-        child: Column(
-          children: [
-            buildActionRow(),
-            SizedBox(height: 25),
-            Row(
-              children: [
-                Expanded(
-                  child: buildPatientTable(),
-                )
-              ],
-            ),
-          ],
-        ),
+      body: Column(
+        children: [
+          buildActionRow(),
+          SizedBox(height: 25),
+          Row(
+            children: [
+              Expanded(
+                child: buildPatientTable(),
+              )
+            ],
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -55,7 +52,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       controller: scrollController,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: 200,
+          maxHeight: 400,
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
