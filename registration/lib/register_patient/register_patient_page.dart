@@ -62,27 +62,28 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   @override
   Widget build(BuildContext context) {
     return WebScaffold(
-        title: "Register patient",
-        body: SizedBox(
-          height: 400,
-          child: Column(
-            children: [
-              buildActionRow(),
-              Row(
-                children: [
-                  Expanded(
-                    child: buildPatientTable(),
-                  )
-                ],
-              ),
-            ],
-          ),
+      title: "Register patient",
+      body: SizedBox(
+        height: 400,
+        child: Column(
+          children: [
+            buildActionRow(),
+            Row(
+              children: [
+                Expanded(
+                  child: buildPatientTable(),
+                )
+              ],
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Add new patient',
-          child: const Icon(Icons.add),
-        ));
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Add new patient',
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 
   Widget buildPatientTable() {
