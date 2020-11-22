@@ -1,6 +1,6 @@
-# registration
+# Registration Desk
 
-A new Flutter project.
+The web application to be used at the registration desk.
 
 ## Getting Started
 
