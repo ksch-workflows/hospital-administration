@@ -23,11 +23,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         children: [
           _buildActionRow(),
           SizedBox(height: 25),
-          Flexible(child: Row(
-            children: [
-              Expanded(child: Container(child: _buildPatientTable())),
-            ],
-          ),),
+          _buildPatientTable(),
         ],
       ),
       onNavigateBack: () {
@@ -49,30 +45,40 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       return Text("No patients found.");
     }
 
-    return Scrollbar(
-      isAlwaysShown: matchingPatients.length > 7,
-      thickness: 8,
-      controller: scrollController,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        controller: scrollController,
-        child: DataTable(
-          columns: <DataColumn>[
-            DataColumn(
-              label: Text("OPD No."),
+    return Flexible(
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              child: Scrollbar(
+                isAlwaysShown: matchingPatients.length > 7,
+                thickness: 8,
+                controller: scrollController,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  controller: scrollController,
+                  child: DataTable(
+                    columns: <DataColumn>[
+                      DataColumn(
+                        label: Text("OPD No."),
+                      ),
+                      DataColumn(
+                        label: Text("Name"),
+                      ),
+                      DataColumn(
+                        label: Text("Location"),
+                      ),
+                      DataColumn(
+                        label: Text("Last visit"),
+                      ),
+                    ],
+                    rows: _buildTableRows(),
+                  ),
+                ),
+              ),
             ),
-            DataColumn(
-              label: Text("Name"),
-            ),
-            DataColumn(
-              label: Text("Location"),
-            ),
-            DataColumn(
-              label: Text("Last visit"),
-            ),
-          ],
-          rows: _buildTableRows(),
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -129,7 +135,7 @@ void main() {
   runApp(
     TestBench(
       child: RegisterPatientPage(),
-      isFullPage: false,
+      isFullPage: true,
     ),
   );
 }
