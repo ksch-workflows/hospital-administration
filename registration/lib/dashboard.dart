@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:registration/activity.dart';
+import 'package:registration/register_patient/register_patient_page.dart';
+import 'package:registration/scaffold.dart';
 import 'package:registration/test_bench.dart';
 
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Activity(
-        title: "Dashboard",
-        body: Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
-            child: Wrap(
-              alignment: WrapAlignment.start,
-              children: [
-                TileButton(icon: Icons.menu_book, title: "Register patient"),
-                TileButton(icon: Icons.money, title: "Process payment"),
-              ],
+    return PageFrame(
+      body: Activity(
+          title: "Dashboard",
+          body: Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              padding: EdgeInsets.fromLTRB(100, 30, 0, 0),
+              child: Wrap(
+                alignment: WrapAlignment.start,
+                children: [
+                  TileButton(icon: Icons.menu_book, title: "Register patient"),
+                  TileButton(icon: Icons.money, title: "Process payment"),
+                ],
+              ),
             ),
-          ),
-        )
+          )),
     );
   }
 }
@@ -58,7 +61,9 @@ class TileButton extends StatelessWidget {
             ),
           ),
         ),
-        onTap: () => print("TODO: Open '$title' screen."),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPatientPage()));
+        },
       ),
     );
   }
@@ -71,4 +76,3 @@ void main() {
     ),
   );
 }
-

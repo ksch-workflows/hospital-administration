@@ -8,8 +8,10 @@ class PageFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [_AppBar(), body],
+    return Material(
+      child: Column(
+        children: [_AppBar(), body],
+      ),
     );
   }
 }

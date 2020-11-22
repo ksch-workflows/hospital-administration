@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:registration/activity.dart";
 import "package:registration/register_patient/model/patient.dart";
+import 'package:registration/scaffold.dart';
 import "package:registration/test_bench.dart";
 import "package:uuid/uuid.dart";
 
@@ -60,27 +61,29 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Activity(
-      title: "Register patient",
-      onNavigateBack: () {},
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Add new patient',
-        child: const Icon(Icons.add),
-      ),
-      body: SizedBox(
-        height: 400,
-        child: Column(
-          children: [
-            buildActionRow(),
-            Row(
-              children: [
-                Expanded(
-                  child: buildPatientTable(),
-                )
-              ],
-            ),
-          ],
+    return PageFrame(
+      body: Activity(
+        title: "Register patient",
+        onNavigateBack: () {},
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          tooltip: 'Add new patient',
+          child: const Icon(Icons.add),
+        ),
+        body: SizedBox(
+          height: 400,
+          child: Column(
+            children: [
+              buildActionRow(),
+              Row(
+                children: [
+                  Expanded(
+                    child: buildPatientTable(),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -90,6 +93,9 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
     if (matchingPatients.isEmpty) {
       return Container();
     }
+
+    var c = Container();
+
     return Scrollbar(
       isAlwaysShown: true,
       thickness: 8,
@@ -174,6 +180,7 @@ void main() {
   runApp(
     TestBench(
       child: RegisterPatientPage(),
+      isFullPage: true,
     ),
   );
 }

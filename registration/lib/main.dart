@@ -6,11 +6,7 @@ void main() {
   runApp(
     MaterialApp(
       title: 'Registration',
-      home: Material(
-        child: PageFrame(
-          body: RegistrationDashboard(),
-        ),
-      ),
+      home: RegistrationDashboard(),
       debugShowCheckedModeBanner: false,
     ),
   );
