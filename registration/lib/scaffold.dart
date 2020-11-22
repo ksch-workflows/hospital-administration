@@ -54,6 +54,7 @@ class _AppBar extends StatelessWidget {
 
     return Container(
       color: appBarColor,
+      height: 55,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -124,6 +124,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   }
                 });
               },
+              autofocus: true,
             ),
           ),
         )
