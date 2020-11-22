@@ -5,13 +5,11 @@ class Activity extends StatelessWidget {
   final String title;
   final Widget body;
   final Function onNavigateBack;
-  final Widget floatingActionButton;
 
   Activity({
     @required this.title,
     @required this.body,
     this.onNavigateBack,
-    this.floatingActionButton,
   })  : assert(title != null),
         assert(body != null);
 
@@ -19,34 +17,31 @@ class Activity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 500,
-      child: Scaffold(
-        body: Align(
-          alignment: Alignment.topLeft,
-          child: Table(
-            columnWidths: {
-              0: FixedColumnWidth(100),
-            },
-            children: [
-              TableRow(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: FloatingActionButton(
-                      onPressed: () {},
-                      tooltip: 'Add new patient',
-                      child: const Icon(Icons.add),
-                    ),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Table(
+          columnWidths: {
+            0: FixedColumnWidth(100),
+          },
+          children: [
+            TableRow(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 50),
+                  child: FloatingActionButton(
+                    onPressed: () {},
+                    tooltip: 'Add new patient',
+                    child: const Icon(Icons.add),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
-                    child: body,
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(2, 50, 0, 0),
+                  child: body,
+                ),
+              ],
+            ),
+          ],
         ),
-        floatingActionButton: floatingActionButton,
       ),
     );
   }

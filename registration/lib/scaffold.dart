@@ -2,34 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:registration/test_bench.dart';
 
 class PageFrame extends StatelessWidget {
+  final String title;
   final Widget body;
+  final Widget floatingActionButton;
+  final Function onNavigateBack;
 
-  PageFrame({@required this.body}) : assert(body != null);
+  PageFrame({
+    @required this.title,
+    @required this.body,
+    this.onNavigateBack,
+    this.floatingActionButton,
+  }) : assert(body != null);
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-        return Stack(
-          children: [
-            Column(
-              children: [_AppBar(), body],
+      child: Column(
+        children: [
+          _AppBar(),
+          SizedBox(height: 50,),
+          Row(children: [
+            SizedBox(
+              width: 100,
             ),
-            ConstrainedBox(
-              constraints: constraints,
-              child: Column(
-                children: [
-                  Expanded(child: Container()),
-                  Container(
-                    height: 75,
-                    color: Colors.grey,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      }),
+            Expanded(child: body),
+            SizedBox(
+              width: 100,
+            )
+          ])
+        ],
+      ),
     );
   }
 }

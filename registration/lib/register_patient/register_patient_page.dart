@@ -62,23 +62,20 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   @override
   Widget build(BuildContext context) {
     return PageFrame(
-      body: Activity(
-        title: "Register patient",
-        onNavigateBack: () {},
-        body: SizedBox(
-          height: 400,
-          child: Column(
-            children: [
-              buildActionRow(),
-              Row(
-                children: [
-                  Expanded(
-                    child: buildPatientTable(),
-                  )
-                ],
-              ),
-            ],
-          ),
+
+      body: SizedBox(
+        height: 400,
+        child: Column(
+          children: [
+            buildActionRow(),
+            Row(
+              children: [
+                Expanded(
+                  child: buildPatientTable(),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );
