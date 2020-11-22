@@ -54,7 +54,7 @@ class RegisterPatientPage extends StatefulWidget {
 }
 
 class _RegisterPatientPageState extends State<RegisterPatientPage> {
-  List<Patient> matchingPatients = [];
+  List<Patient> matchingPatients;
 
   final ScrollController scrollController = ScrollController();
 
@@ -67,6 +67,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         child: Column(
           children: [
             buildActionRow(),
+            SizedBox(height: 25),
             Row(
               children: [
                 Expanded(
@@ -86,8 +87,11 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   }
 
   Widget buildPatientTable() {
-    if (matchingPatients.isEmpty) {
+    if (matchingPatients == null) {
       return Container();
+    }
+    if (matchingPatients.isEmpty) {
+      return Text("No patients found.");
     }
 
     return Scrollbar(
@@ -155,7 +159,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                 setState(() {
                   var normalizedValue = value.trim().toLowerCase();
                   if (normalizedValue.isEmpty) {
-                    matchingPatients = [];
+                    matchingPatients = null;
                   } else {
                     matchingPatients =
                         kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
