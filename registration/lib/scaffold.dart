@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:registration/test_bench.dart';
 
-class PageFrame extends StatelessWidget {
+class WebScaffold extends StatelessWidget {
   final String title;
   final Widget body;
   final Widget floatingActionButton;
   final Function onNavigateBack;
 
-  PageFrame({
+  WebScaffold({
     @required this.title,
     @required this.body,
     this.onNavigateBack,
     this.floatingActionButton,
-  }) : assert(body != null);
+  })  : assert(title != null),
+        assert(body != null);
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Column(
         children: [
-          _AppBar(),
-          SizedBox(height: 50,),
+          _AppBar(title: title,),
+          SizedBox(
+            height: 50,
+          ),
           Row(children: [
-            SizedBox(
+            Container(
               width: 100,
+              child: floatingActionButton,
             ),
             Expanded(child: body),
             SizedBox(
@@ -37,6 +41,10 @@ class PageFrame extends StatelessWidget {
 }
 
 class _AppBar extends StatelessWidget {
+  final String title;
+
+  _AppBar({@required this.title}) : assert(title != null);
+
   @override
   Widget build(BuildContext context) {
     final appBarColor = Theme.of(context).primaryColor;
@@ -73,7 +81,7 @@ class _AppBar extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(left: 20),
           child: Text(
-            "Register patient",
+            title,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -110,7 +118,7 @@ class _AppBar extends StatelessWidget {
 void main() {
   runApp(
     TestBench(
-      child: PageFrame(
+      child: WebScaffold(
         body: Row(
           children: [
             const Text('Hello, Test Bench!'),

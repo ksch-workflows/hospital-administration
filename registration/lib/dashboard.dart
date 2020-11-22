@@ -8,7 +8,7 @@ import 'package:registration/test_bench.dart';
 class RegistrationDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return PageFrame(
+    return WebScaffold(
       body: Activity(
           title: "Dashboard",
           body: Align(

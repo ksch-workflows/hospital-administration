@@ -61,8 +61,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageFrame(
-
+    return WebScaffold(
+      title: "Register patient",
       body: SizedBox(
         height: 400,
         child: Column(
