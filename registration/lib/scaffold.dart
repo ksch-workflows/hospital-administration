@@ -24,7 +24,9 @@ class WebScaffold extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          Row(children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Container(
               width: 100,
               child: floatingActionButton,
@@ -33,7 +35,7 @@ class WebScaffold extends StatelessWidget {
             SizedBox(
               width: 100,
             )
-          ])
+          ],)
         ],
       ),
     );
