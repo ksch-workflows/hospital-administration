@@ -49,31 +49,29 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       child: Row(
         children: [
           Expanded(
-            child: Container(
-              child: Scrollbar(
-                isAlwaysShown: matchingPatients.length > 7,
-                thickness: 8,
+            child: Scrollbar(
+              isAlwaysShown: matchingPatients.length > 7,
+              thickness: 8,
+              controller: scrollController,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 controller: scrollController,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  controller: scrollController,
-                  child: DataTable(
-                    columns: <DataColumn>[
-                      DataColumn(
-                        label: Text("OPD No."),
-                      ),
-                      DataColumn(
-                        label: Text("Name"),
-                      ),
-                      DataColumn(
-                        label: Text("Location"),
-                      ),
-                      DataColumn(
-                        label: Text("Last visit"),
-                      ),
-                    ],
-                    rows: _buildTableRows(),
-                  ),
+                child: DataTable(
+                  columns: <DataColumn>[
+                    DataColumn(
+                      label: Text("OPD No."),
+                    ),
+                    DataColumn(
+                      label: Text("Name"),
+                    ),
+                    DataColumn(
+                      label: Text("Location"),
+                    ),
+                    DataColumn(
+                      label: Text("Last visit"),
+                    ),
+                  ],
+                  rows: _buildTableRows(),
                 ),
               ),
             ),
