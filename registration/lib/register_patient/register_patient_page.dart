@@ -30,7 +30,15 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(context: context, builder: (BuildContext context) {
+            return SimpleDialog(
+              children: <Widget>[
+                Container(height: 200, width: 200, color: Colors.yellow,),
+              ],
+            );
+          });
+        },
         tooltip: "Add new patient",
         child: const Icon(Icons.add),
       ),
