@@ -15,16 +15,6 @@ class FormStepper extends StatefulWidget {
   _FormStepperState createState() => _FormStepperState();
 }
 
-abstract class FormStep extends StatelessWidget {
-  final String title;
-
-  FormStep({this.title});
-
-  bool validate() {
-    return true;
-  }
-}
-
 class _FormStepperState extends State<FormStepper> {
   int _currentStep = 0;
 
@@ -111,7 +101,7 @@ class _Header extends StatelessWidget {
         Row(children: stepTitleWidgets),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.blueAccent),
+            border: Border.all(color: Theme.of(context).dividerColor),
           ),
         ),
       ],
@@ -147,5 +137,15 @@ class _ActionButtons extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+abstract class FormStep extends StatelessWidget {
+  final String title;
+
+  FormStep({this.title});
+
+  bool validate() {
+    return true;
   }
 }
