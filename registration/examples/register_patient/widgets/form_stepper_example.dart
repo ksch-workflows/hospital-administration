@@ -22,6 +22,7 @@ void main() {
 
 class _FirstStep extends FormStep {
   final _formKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
 
   _FirstStep() : super(title: "First step");
 
@@ -46,6 +47,7 @@ class _FirstStepState extends State<_FirstStep> {
         key: widget._formKey,
         child: Column(children: <Widget>[
           TextFormField(
+            controller: widget.myController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Please enter some text";
