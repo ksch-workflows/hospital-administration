@@ -216,7 +216,7 @@ class _InactiveIndexBubble extends StatelessWidget {
 /// - https://stackoverflow.com/questions/57995591/manage-multiple-form-validation-in-stepper-flutter/58004730
 /// - https://flutter.dev/docs/cookbook/forms/validation
 /// - https://flutter.dev/docs/cookbook/forms/retrieve-input
-abstract class FormStep extends StatefulWidget {
+abstract class FormStep extends StatelessWidget {
   final String title;
 
   FormStep({this.title});
