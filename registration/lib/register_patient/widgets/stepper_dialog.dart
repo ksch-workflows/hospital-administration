@@ -21,7 +21,7 @@ class _StepperDialogState extends State<StepperDialog> {
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
-            child: widget.steps[1].content,
+            child: widget.steps[0].content,
           ),
         ),
         _ActionButtons(),
