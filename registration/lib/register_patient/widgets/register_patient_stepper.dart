@@ -24,13 +24,36 @@ class _PatientRegistrationStepperState extends State<PatientRegistrationStepper>
       onStepContinue: next,
       onStepTapped: (step) => goTo(step),
       onStepCancel: cancel,
+      controlsBuilder: (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+        return Column(
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Row(
+              children: [
+                RaisedButton(
+                  child: Text("Cancel"),
+                  onPressed: () => print("TODO: Cancel"),
+                ),
+                RaisedButton(
+                  child: Text("Back"),
+                  onPressed: onStepCancel,
+                ),
+                RaisedButton(
+                  child: Text("Continue"),
+                  onPressed: onStepContinue,
+                ),
+              ],
+            ),
+          ],
+        );
+      },
     );
   }
 
   next() {
-    currentStep + 1 != _steps.length
-        ? goTo(currentStep + 1)
-        : setState(() => complete = true);
+    currentStep + 1 != _steps.length ? goTo(currentStep + 1) : setState(() => complete = true);
   }
 
   cancel() {
