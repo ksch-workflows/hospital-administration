@@ -28,8 +28,9 @@ class _AddressForm extends FormStep {
   _AddressForm() : super(title: "Personal data");
 
   @override
-  Widget build(BuildContext context) {
-    return Text("<Personal data>");
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
@@ -37,8 +38,9 @@ class _ContactForm extends FormStep {
   _ContactForm() : super(title: "Contact information");
 
   @override
-  Widget build(BuildContext context) {
-    return Text("<Contact information>");
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
@@ -46,7 +48,8 @@ class _VisitTypeForm extends FormStep {
   _VisitTypeForm() : super(title: "Visit type");
 
   @override
-  Widget build(BuildContext context) {
-    return Text("<Visit type>");
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }

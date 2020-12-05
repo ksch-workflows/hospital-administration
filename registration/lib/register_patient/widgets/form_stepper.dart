@@ -208,7 +208,7 @@ class _InactiveIndexBubble extends StatelessWidget {
   }
 }
 
-abstract class FormStep extends StatelessWidget {
+abstract class FormStep extends StatefulWidget {
   final String title;
 
   FormStep({this.title});
