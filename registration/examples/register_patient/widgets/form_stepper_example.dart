@@ -20,6 +20,16 @@ void main() {
   );
 }
 
+class RegisterPatientFormModel {
+  FirstStepModel firstStep = FirstStepModel();
+}
+
+class FirstStepModel {
+  final _formKey = GlobalKey<FormState>();
+  final myController = TextEditingController();
+}
+
+
 class _FirstStep extends FormStep {
   final _formKey = GlobalKey<FormState>();
   final myController = TextEditingController();
