@@ -17,38 +17,42 @@ class _PatientRegistrationStepperState extends State<PatientRegistrationStepper>
 
   @override
   Widget build(BuildContext context) {
-    return Stepper(
-      steps: _steps,
-      type: StepperType.horizontal,
-      currentStep: currentStep,
-      onStepContinue: next,
-      onStepTapped: (step) => goTo(step),
-      onStepCancel: cancel,
-      controlsBuilder: (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
-        return Column(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stepper(
+          steps: _steps,
+          type: StepperType.horizontal,
+          currentStep: currentStep,
+          onStepContinue: next,
+          onStepTapped: (step) => goTo(step),
+          onStepCancel: cancel,
+          controlsBuilder: (BuildContext context, {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+            return Column(
               children: [
-                RaisedButton(
-                  child: Text("Cancel"),
-                  onPressed: () => print("TODO: Cancel"),
+                SizedBox(
+                  height: 50,
                 ),
-                RaisedButton(
-                  child: Text("Back"),
-                  onPressed: onStepCancel,
-                ),
-                RaisedButton(
-                  child: Text("Continue"),
-                  onPressed: onStepContinue,
+                Row(
+                  children: [
+                    RaisedButton(
+                      child: Text("Cancel"),
+                      onPressed: () => print("TODO: Cancel"),
+                    ),
+                    RaisedButton(
+                      child: Text("Back"),
+                      onPressed: onStepCancel,
+                    ),
+                    RaisedButton(
+                      child: Text("Continue"),
+                      onPressed: onStepContinue,
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         );
-      },
+      }
     );
   }
 
