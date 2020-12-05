@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:registration/test_bench.dart';
 
-class StepperDialog extends StatefulWidget {
-  List<Step> steps;
+class FormStepper extends StatefulWidget {
+  final List<FormStep> steps;
 
-  StepperDialog({
+  FormStepper({
     @required this.steps,
   }) : assert(steps != null);
 
   @override
-  _StepperDialogState createState() => _StepperDialogState();
+  _FormStepperState createState() => _FormStepperState();
 }
 
-class _StepperDialogState extends State<StepperDialog> {
+abstract class FormStep extends StatelessWidget {
+  String get title;
+
+  bool validate() {
+    return true;
+  }
+}
+
+class _FormStepperState extends State<FormStepper> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +28,7 @@ class _StepperDialogState extends State<StepperDialog> {
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
-            child: widget.steps[0].content,
+            child: widget.steps[0],
           ),
         ),
         _ActionButtons(),
@@ -62,18 +69,4 @@ class _ActionButtons extends StatelessWidget {
   }
 }
 
-void main() {
-  List<Step> steps = [
-    Step(title: Text("First"), content: Text("111111111")),
-    Step(title: Text("Second"), content: Text("222222222")),
-    Step(title: Text("Third"), content: Text("333333333")),
-  ];
 
-  runApp(
-    TestBench(
-      child: StepperDialog(
-        steps: steps,
-      ),
-    ),
-  );
-}
