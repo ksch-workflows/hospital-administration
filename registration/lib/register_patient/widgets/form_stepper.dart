@@ -20,6 +20,8 @@ abstract class FormStep extends StatelessWidget {
 }
 
 class _FormStepperState extends State<FormStepper> {
+  int _currentStep = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,12 +30,41 @@ class _FormStepperState extends State<FormStepper> {
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
-            child: widget.steps[0],
+            child: widget.steps[currentStep],
           ),
         ),
-        _ActionButtons(),
+        _ActionButtons(
+          onBack: goToPreviousStep,
+          onContinue: goToNextStep,
+        ),
       ],
     );
+  }
+
+  void goToPreviousStep() {
+    setState(() {
+      if (currentStep != 0) {
+        currentStep = currentStep - 1;
+      }
+    });
+  }
+
+  void goToNextStep() {
+    setState(() {
+      if (currentStep != widget.steps.length - 1) {
+        currentStep = currentStep + 1;
+      }
+    });
+  }
+  
+  int get currentStep {
+    return _currentStep;
+  }
+
+  set currentStep(int value) {
+    assert(value >= 0);
+    assert(value < widget.steps.length);
+    _currentStep = value;
   }
 }
 
@@ -45,13 +76,19 @@ class _Header extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
+  final Function onBack;
+  final Function onCancel;
+  final Function onContinue;
+
+  _ActionButtons({this.onBack, this.onCancel, this.onContinue});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         RaisedButton(
           child: Text("Back"),
-          onPressed: () {},
+          onPressed: onBack,
         ),
         Expanded(
           child: Container(),
@@ -62,7 +99,7 @@ class _ActionButtons extends StatelessWidget {
         ),
         RaisedButton(
           child: Text("Continue"),
-          onPressed: () {},
+          onPressed: onContinue,
         ),
       ],
     );
