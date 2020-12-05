@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:registration/dashboard.dart';
 import "package:registration/register_patient/model/patient.dart";
+import 'package:registration/register_patient/widgets/register_patient_dialog.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
 import "package:registration/test_bench.dart";
@@ -32,11 +33,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(context: context, builder: (BuildContext context) {
-            return SimpleDialog(
-              children: <Widget>[
-                Container(height: 200, width: 200, color: Colors.yellow,),
-              ],
-            );
+            return RegisterPatientDialog();
           });
         },
         tooltip: "Add new patient",
@@ -135,13 +132,4 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       ],
     );
   }
-}
-
-void main() {
-  runApp(
-    TestBench(
-      child: RegisterPatientPage(),
-      isFullPage: true,
-    ),
-  );
 }

@@ -70,32 +70,78 @@ class _FormStepperState extends State<FormStepper> {
   }
 }
 
-class _ActiveIndexBubble extends StatelessWidget {
-  final int index;
+class _Header extends StatelessWidget {
+  final List<String> stepTitles;
+  final int currentStep;
 
-  _ActiveIndexBubble(this.index);
+  _Header({@required this.stepTitles, @required this.currentStep}) : assert(stepTitles != null);
 
   @override
   Widget build(BuildContext context) {
-    return _IndexBubble(
-      index: index,
-      foregroundColor: Theme.of(context).colorScheme.onSecondary,
-      backgroundColor: Theme.of(context).accentColor,
+    List<Widget> stepTitleWidgets = [];
+    for (int i = 0; i < stepTitles.length; i++) {
+      Widget stepTitleWidget = Row(
+        children: [
+          i == currentStep ? _ActiveIndexBubble(i) : _InactiveIndexBubble(i),
+          Text(stepTitles[i], style: i == currentStep ? TextStyle(fontWeight: FontWeight.bold) : null),
+        ],
+      );
+      stepTitleWidgets.add(stepTitleWidget);
+    }
+
+    return Column(
+      children: [
+        Row(children: [
+          SizedBox(width: 15),
+          ...stepTitleWidgets,
+        ]),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).dividerColor),
+          ),
+        ),
+      ],
     );
   }
 }
 
-class _InactiveIndexBubble extends StatelessWidget {
-  final int index;
+class _ActionButtons extends StatelessWidget {
+  final Function onBack;
+  final Function onCancel;
+  final Function onContinue;
 
-  _InactiveIndexBubble(this.index);
+  _ActionButtons({this.onBack, this.onCancel, this.onContinue});
 
   @override
   Widget build(BuildContext context) {
-    return _IndexBubble(
-      index: index,
-      backgroundColor: Theme.of(context).buttonColor,
-      foregroundColor: Theme.of(context).colorScheme.onSurface,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+      child: Row(
+        children: [
+          RaisedButton(
+            child: Text("Back"),
+            onPressed: onBack,
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          RaisedButton(
+            child: Text("Cancel"),
+            onPressed: () {},
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          RaisedButton(
+            color: Theme.of(context).accentColor,
+            child: Text(
+              "Continue",
+              style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+            ),
+            onPressed: onContinue,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -122,7 +168,7 @@ class _IndexBubble extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          index.toString(),
+          (index + 1).toString(),
           style: TextStyle(
             color: foregroundColor,
           ),
@@ -132,65 +178,32 @@ class _IndexBubble extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
-  final List<String> stepTitles;
-  final int currentStep;
+class _ActiveIndexBubble extends StatelessWidget {
+  final int index;
 
-  _Header({@required this.stepTitles, @required this.currentStep}) : assert(stepTitles != null);
+  _ActiveIndexBubble(this.index);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> stepTitleWidgets = [];
-    for (int i = 0; i < stepTitles.length; i++) {
-      Widget stepTitleWidget = Row(
-        children: [
-          i == currentStep ? _ActiveIndexBubble(i) : _InactiveIndexBubble(i),
-          Text(stepTitles[i], style: i == currentStep ? TextStyle(fontWeight: FontWeight.bold) : null),
-        ],
-      );
-      stepTitleWidgets.add(stepTitleWidget);
-    }
-
-    return Column(
-      children: [
-        Row(children: stepTitleWidgets),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).dividerColor),
-          ),
-        ),
-      ],
+    return _IndexBubble(
+      index: index,
+      foregroundColor: Theme.of(context).colorScheme.onSecondary,
+      backgroundColor: Theme.of(context).accentColor,
     );
   }
 }
 
-class _ActionButtons extends StatelessWidget {
-  final Function onBack;
-  final Function onCancel;
-  final Function onContinue;
+class _InactiveIndexBubble extends StatelessWidget {
+  final int index;
 
-  _ActionButtons({this.onBack, this.onCancel, this.onContinue});
+  _InactiveIndexBubble(this.index);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        RaisedButton(
-          child: Text("Back"),
-          onPressed: onBack,
-        ),
-        Expanded(
-          child: Container(),
-        ),
-        RaisedButton(
-          child: Text("Cancel"),
-          onPressed: () {},
-        ),
-        RaisedButton(
-          child: Text("Continue"),
-          onPressed: onContinue,
-        ),
-      ],
+    return _IndexBubble(
+      index: index,
+      backgroundColor: Theme.of(context).buttonColor,
+      foregroundColor: Theme.of(context).colorScheme.onSurface,
     );
   }
 }
