@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
+/// References
+/// - https://material.io/archive/guidelines/components/steppers.html#
 class FormStepper extends StatefulWidget {
   final List<FormStep> steps;
 
@@ -12,7 +15,9 @@ class FormStepper extends StatefulWidget {
 }
 
 abstract class FormStep extends StatelessWidget {
-  String get title;
+  final String title;
+
+  FormStep({this.title});
 
   bool validate() {
     return true;
@@ -26,7 +31,10 @@ class _FormStepperState extends State<FormStepper> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _Header(),
+        _Header(
+          stepTitles: widget.steps.map((s) => s.title).toList(),
+          currentStep: currentStep,
+        ),
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
@@ -56,7 +64,7 @@ class _FormStepperState extends State<FormStepper> {
       }
     });
   }
-  
+
   int get currentStep {
     return _currentStep;
   }
@@ -69,9 +77,34 @@ class _FormStepperState extends State<FormStepper> {
 }
 
 class _Header extends StatelessWidget {
+  final List<String> stepTitles;
+  final int currentStep;
+
+  _Header({@required this.stepTitles, @required this.currentStep}) : assert(stepTitles != null);
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    List<Widget> stepTitleWidgets = [];
+    for (int i = 0; i < stepTitles.length; i++) {
+      Widget stepTitleWidget = Row(
+        children: [
+          Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(color: Colors.orange, shape: BoxShape.circle),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(i.toString()),
+            ),
+          ),
+          Text(stepTitles[i], style: i == currentStep ? TextStyle(fontWeight: FontWeight.bold) : null),
+        ],
+      );
+      stepTitleWidgets.add(stepTitleWidget);
+    }
+
+    return Row(
+      children: stepTitleWidgets,
+    );
   }
 }
 
@@ -105,5 +138,3 @@ class _ActionButtons extends StatelessWidget {
     );
   }
 }
-
-

@@ -21,8 +21,7 @@ void main() {
 }
 
 class _FirstStep extends FormStep {
-  @override
-  String get title => "First";
+  _FirstStep() : super(title: "First step");
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,7 @@ class _FirstStep extends FormStep {
 }
 
 class _SecondStep extends FormStep {
-  @override
-  String get title => "Second";
+  _SecondStep() : super(title: "Second step");
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +39,7 @@ class _SecondStep extends FormStep {
 }
 
 class _ThirdStep extends FormStep {
-  @override
-  String get title => "Third";
+  _ThirdStep() : super(title: "Third step");
 
   @override
   Widget build(BuildContext context) {
