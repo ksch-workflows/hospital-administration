@@ -44,19 +44,23 @@ class _FormStepperState extends State<FormStepper> {
   }
 
   void goToPreviousStep() {
-    setState(() {
-      if (currentStep != 0) {
-        currentStep = currentStep - 1;
-      }
-    });
+    if (widget.steps[currentStep].validate()) {
+      setState(() {
+        if (currentStep != 0) {
+          currentStep = currentStep - 1;
+        }
+      });
+    }
   }
 
   void goToNextStep() {
-    setState(() {
-      if (currentStep != widget.steps.length - 1) {
-        currentStep = currentStep + 1;
-      }
-    });
+    if (widget.steps[currentStep].validate()) {
+      setState(() {
+        if (currentStep != widget.steps.length - 1) {
+          currentStep = currentStep + 1;
+        }
+      });
+    }
   }
 
   int get currentStep {
@@ -208,6 +212,9 @@ class _InactiveIndexBubble extends StatelessWidget {
   }
 }
 
+/// References
+/// - https://stackoverflow.com/questions/57995591/manage-multiple-form-validation-in-stepper-flutter/58004730
+/// - https://flutter.dev/docs/cookbook/forms/validation
 abstract class FormStep extends StatefulWidget {
   final String title;
 

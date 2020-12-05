@@ -21,29 +21,41 @@ void main() {
 }
 
 class _FirstStep extends FormStep {
+  final _formKey = GlobalKey<FormState>();
+
   _FirstStep() : super(title: "First step");
 
   @override
   State<StatefulWidget> createState() => _FirstStepState();
+
+  @override
+  bool validate() {
+    var currentState = _formKey.currentState;
+    if (currentState != null) {
+      return currentState.validate();
+    } else {
+      return true;
+    }
+  }
 }
 
 class _FirstStepState extends State<_FirstStep> {
-
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: _formKey,
-        child: Column(
-            children: <Widget>[
-              TextFormField(),
-              TextFormField(),
-            ]
-        )
-    );
+        key: widget._formKey,
+        child: Column(children: <Widget>[
+          TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter some text";
+              }
+              return null;
+            },
+          ),
+          TextFormField(),
+        ]));
   }
-
 }
 
 class _SecondStep extends FormStep {
@@ -58,7 +70,6 @@ class _SecondStepState extends State<_SecondStep> {
   Widget build(BuildContext context) {
     return Text("Second step state");
   }
-  
 }
 
 class _ThirdStep extends FormStep {

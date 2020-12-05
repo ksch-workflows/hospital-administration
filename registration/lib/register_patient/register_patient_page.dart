@@ -4,7 +4,6 @@ import "package:registration/register_patient/model/patient.dart";
 import 'package:registration/register_patient/widgets/register_patient_dialog.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
-import "package:registration/test_bench.dart";
 
 class RegisterPatientPage extends StatefulWidget {
   @override
@@ -32,9 +31,11 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       },
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(context: context, builder: (BuildContext context) {
-            return RegisterPatientDialog();
-          });
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return RegisterPatientDialog();
+              });
         },
         tooltip: "Add new patient",
         child: const Icon(Icons.add),
