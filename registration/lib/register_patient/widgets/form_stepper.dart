@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
@@ -38,7 +39,10 @@ class _FormStepperState extends State<FormStepper> {
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
-            child: widget.steps[currentStep],
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: widget.steps[currentStep],
+            ),
           ),
         ),
         _ActionButtons(
@@ -102,8 +106,15 @@ class _Header extends StatelessWidget {
       stepTitleWidgets.add(stepTitleWidget);
     }
 
-    return Row(
-      children: stepTitleWidgets,
+    return Column(
+      children: [
+        Row(children: stepTitleWidgets),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent),
+          ),
+        ),
+      ],
     );
   }
 }
