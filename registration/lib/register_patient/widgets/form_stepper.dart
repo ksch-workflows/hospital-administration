@@ -70,6 +70,68 @@ class _FormStepperState extends State<FormStepper> {
   }
 }
 
+class _ActiveIndexBubble extends StatelessWidget {
+  final int index;
+
+  _ActiveIndexBubble(this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return _IndexBubble(
+      index: index,
+      foregroundColor: Theme.of(context).colorScheme.onSecondary,
+      backgroundColor: Theme.of(context).accentColor,
+    );
+  }
+}
+
+class _InactiveIndexBubble extends StatelessWidget {
+  final int index;
+
+  _InactiveIndexBubble(this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return _IndexBubble(
+      index: index,
+      backgroundColor: Theme.of(context).buttonColor,
+      foregroundColor: Theme.of(context).colorScheme.onSurface,
+    );
+  }
+}
+
+class _IndexBubble extends StatelessWidget {
+  final int index;
+  final Color foregroundColor;
+  final Color backgroundColor;
+
+  _IndexBubble({
+    this.index,
+    this.foregroundColor,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        shape: BoxShape.circle,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          index.toString(),
+          style: TextStyle(
+            color: foregroundColor,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _Header extends StatelessWidget {
   final List<String> stepTitles;
   final int currentStep;
@@ -82,14 +144,7 @@ class _Header extends StatelessWidget {
     for (int i = 0; i < stepTitles.length; i++) {
       Widget stepTitleWidget = Row(
         children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(color: Colors.orange, shape: BoxShape.circle),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(i.toString()),
-            ),
-          ),
+          i == currentStep ? _ActiveIndexBubble(i) : _InactiveIndexBubble(i),
           Text(stepTitles[i], style: i == currentStep ? TextStyle(fontWeight: FontWeight.bold) : null),
         ],
       );
