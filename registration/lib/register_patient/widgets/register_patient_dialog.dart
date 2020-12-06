@@ -28,7 +28,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
           child: FormStepper(
             steps: [
               _PersonalDataForm(),
-              _ContactForm(),
+              _ContactInformationForm(),
               _VisitTypeForm(),
             ],
           ),
@@ -41,6 +41,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 class _RegisterPatientDialogModel {
   _PersonalDataModel personalData = _PersonalDataModel();
   _ContactInformationModel contactInformation = _ContactInformationModel();
+  _VisitTypeModel visitType = _VisitTypeModel();
 }
 
 class _PersonalDataModel {
@@ -69,34 +70,35 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: formModel.formKey,
-        child: Column(children: <Widget>[
-          TextFormField(
-            controller: formModel.nameFieldController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "The patient's name is required information.";
-              }
-              return null;
-            },
-            decoration: InputDecoration(
-                labelText: "Patient's name*",
-                border: OutlineInputBorder(),
-                hintText: "Please enter the patient's name",
-                helperText: "* Required"),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          TextFormField(
-            controller: formModel.fatherNameFieldController,
-            decoration: InputDecoration(
-              labelText: "Father's name",
+      key: formModel.formKey,
+      child: Column(children: <Widget>[
+        TextFormField(
+          controller: formModel.nameFieldController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "The patient's name is required information.";
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+              labelText: "Patient's name*",
               border: OutlineInputBorder(),
-              hintText: "Please enter the patient father's name, if applicable",
-            ),
+              hintText: "Please enter the patient's name",
+              helperText: "* Required"),
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        TextFormField(
+          controller: formModel.fatherNameFieldController,
+          decoration: InputDecoration(
+            labelText: "Father's name",
+            border: OutlineInputBorder(),
+            hintText: "Please enter the patient father's name, if applicable",
           ),
-        ]));
+        ),
+      ]),
+    );
   }
 
   @override
@@ -110,20 +112,46 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
   }
 }
 
-class _ContactForm extends StatelessWidget implements FormStep {
-  _ContactForm();
+class _ContactInformationForm extends StatelessWidget implements FormStep {
+  final _ContactInformationModel formModel = getIt<_RegisterPatientDialogModel>().contactInformation;
+  
+  _ContactInformationForm();
 
   @override
   String get title => "Contact information";
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Form(
+      key: formModel.formKey,
+      child: Column(children: <Widget>[
+        TextFormField(
+          controller: formModel.locationFieldController,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "The patient's location is required information.";
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+              labelText: "Location*",
+              border: OutlineInputBorder(),
+              hintText: "Please enter the patient's location",
+              helperText: "* Required"),
+        ),
+      ]),
+    );
   }
 
   @override
-  bool validate() => true;
+  bool validate() {
+    var currentState = formModel.formKey.currentState;
+    if (currentState != null) {
+      return currentState.validate();
+    } else {
+      return true;
+    }
+  }
 }
 
 class _VisitTypeForm extends StatelessWidget implements FormStep {
