@@ -16,6 +16,12 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   final ScrollController scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WebScaffold(
       title: "Register patient",

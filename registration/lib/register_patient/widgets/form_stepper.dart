@@ -30,7 +30,7 @@ class _FormStepperState extends State<FormStepper> {
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
               child: widget.steps[currentStep],
             ),
           ),
@@ -221,7 +221,5 @@ abstract class FormStep extends StatelessWidget {
 
   FormStep({this.title});
 
-  bool validate() {
-    return true;
-  }
+  bool validate();
 }

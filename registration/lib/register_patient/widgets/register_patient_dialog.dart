@@ -1,9 +1,23 @@
-
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:registration/register_patient/widgets/form_stepper.dart';
 
+GetIt getIt = GetIt.instance;
 
-class RegisterPatientDialog extends StatelessWidget {
+class RegisterPatientDialog extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _RegisterPatientDialogState();
+}
+
+class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
+  @override
+  void initState() {
+    super.initState();
+    if (!getIt.isRegistered<_RegisterPatientDialogModel>()) {
+      getIt.registerSingleton<_RegisterPatientDialogModel>(_RegisterPatientDialogModel());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
@@ -13,7 +27,7 @@ class RegisterPatientDialog extends StatelessWidget {
           constraints: BoxConstraints.tight(Size(800, 400)),
           child: FormStepper(
             steps: [
-              _AddressForm(),
+              _PersonalDataForm(),
               _ContactForm(),
               _VisitTypeForm(),
             ],
@@ -24,13 +38,61 @@ class RegisterPatientDialog extends StatelessWidget {
   }
 }
 
-class _AddressForm extends FormStep {
-  _AddressForm() : super(title: "Personal data");
+class _RegisterPatientDialogModel {
+  _PersonalDataModel personalData = _PersonalDataModel();
+}
+
+class _PersonalDataModel {
+  final formKey = GlobalKey<FormState>();
+  final nameFieldController = TextEditingController();
+  final fatherNameFieldController = TextEditingController();
+}
+
+class _PersonalDataForm extends FormStep {
+  final _PersonalDataModel formModel = getIt<_RegisterPatientDialogModel>().personalData;
+
+  _PersonalDataForm() : super(title: "Personal data");
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Form(
+        key: formModel.formKey,
+        child: Column(children: <Widget>[
+          TextFormField(
+            controller: formModel.nameFieldController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "The patient's name is required information.";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              labelText: "Patient's name*",
+              border: OutlineInputBorder(),
+              hintText: "Please enter the patient's name",
+              helperText: "* Required"
+            ),
+          ),
+          SizedBox(height: 15,),
+          TextFormField(
+            controller: formModel.fatherNameFieldController,
+            decoration: InputDecoration(
+              labelText: "Father's name",
+              border: OutlineInputBorder(),
+              hintText: "Please enter the patient father's name, if applicable",
+            ),
+          ),
+        ]));
+  }
+
+  @override
+  bool validate() {
+    var currentState = formModel.formKey.currentState;
+    if (currentState != null) {
+      return currentState.validate();
+    } else {
+      return true;
+    }
   }
 }
 
@@ -42,6 +104,9 @@ class _ContactForm extends FormStep {
     // TODO: implement build
     throw UnimplementedError();
   }
+
+  @override
+  bool validate() => true;
 }
 
 class _VisitTypeForm extends FormStep {
@@ -50,6 +115,12 @@ class _VisitTypeForm extends FormStep {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    throw UnimplementedError();
+  }
+
+  @override
+  bool validate() {
+    // TODO: implement validate
     throw UnimplementedError();
   }
 }

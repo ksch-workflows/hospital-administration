@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:registration/register_patient/widgets/form_stepper.dart';
 import 'package:registration/test_bench.dart';
-import 'package:get_it/get_it.dart';
-
-GetIt getIt = GetIt.instance;
 
 void main() {
-  getIt.registerSingleton<RegisterPatientFormModel>(RegisterPatientFormModel());
+  getIt.registerSingleton<_ExampleFormModel>(_ExampleFormModel());
 
   var firstStep = _FirstStep();
   var secondStep = _SecondStep();
@@ -25,7 +22,7 @@ void main() {
   );
 }
 
-class RegisterPatientFormModel {
+class _ExampleFormModel {
   FirstStepModel firstStep = FirstStepModel();
 }
 
@@ -40,7 +37,7 @@ class _FirstStep extends FormStep {
 
   @override
   Widget build(BuildContext context) {
-    var model = getIt<RegisterPatientFormModel>().firstStep;
+    var model = getIt<_ExampleFormModel>().firstStep;
     return Form(
         key: model.formKey,
         child: Column(children: <Widget>[
@@ -59,7 +56,7 @@ class _FirstStep extends FormStep {
 
   @override
   bool validate() {
-    var model = getIt<RegisterPatientFormModel>().firstStep;
+    var model = getIt<_ExampleFormModel>().firstStep;
     var currentState = model.formKey.currentState;
     if (currentState != null) {
       return currentState.validate();
@@ -76,6 +73,9 @@ class _SecondStep extends FormStep {
   Widget build(BuildContext context) {
     return Text("Second step state");
   }
+
+  @override
+  bool validate() => true;
 }
 
 class _ThirdStep extends FormStep {
@@ -85,4 +85,7 @@ class _ThirdStep extends FormStep {
   Widget build(BuildContext context) {
     return Text("Third step state");
   }
+
+  @override
+  bool validate() => true;
 }
