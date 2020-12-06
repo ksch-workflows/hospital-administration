@@ -40,6 +40,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
 class _RegisterPatientDialogModel {
   _PersonalDataModel personalData = _PersonalDataModel();
+  _ContactInformationModel contactInformation = _ContactInformationModel();
 }
 
 class _PersonalDataModel {
@@ -48,10 +49,22 @@ class _PersonalDataModel {
   final fatherNameFieldController = TextEditingController();
 }
 
-class _PersonalDataForm extends FormStep {
+class _ContactInformationModel {
+  final formKey = GlobalKey<FormState>();
+  final locationFieldController = TextEditingController();
+}
+
+class _VisitTypeModel {
+  final formKey = GlobalKey<FormState>();
+}
+
+class _PersonalDataForm extends StatelessWidget implements FormStep {
   final _PersonalDataModel formModel = getIt<_RegisterPatientDialogModel>().personalData;
 
-  _PersonalDataForm() : super(title: "Personal data");
+  _PersonalDataForm();
+
+  @override
+  String get title => "Personal data";
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +80,14 @@ class _PersonalDataForm extends FormStep {
               return null;
             },
             decoration: InputDecoration(
-              labelText: "Patient's name*",
-              border: OutlineInputBorder(),
-              hintText: "Please enter the patient's name",
-              helperText: "* Required"
-            ),
+                labelText: "Patient's name*",
+                border: OutlineInputBorder(),
+                hintText: "Please enter the patient's name",
+                helperText: "* Required"),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           TextFormField(
             controller: formModel.fatherNameFieldController,
             decoration: InputDecoration(
@@ -96,8 +110,11 @@ class _PersonalDataForm extends FormStep {
   }
 }
 
-class _ContactForm extends FormStep {
-  _ContactForm() : super(title: "Contact information");
+class _ContactForm extends StatelessWidget implements FormStep {
+  _ContactForm();
+
+  @override
+  String get title => "Contact information";
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +126,11 @@ class _ContactForm extends FormStep {
   bool validate() => true;
 }
 
-class _VisitTypeForm extends FormStep {
-  _VisitTypeForm() : super(title: "Visit type");
+class _VisitTypeForm extends StatelessWidget implements FormStep {
+  _VisitTypeForm();
+
+  @override
+  String get title => "Visit type";
 
   @override
   Widget build(BuildContext context) {

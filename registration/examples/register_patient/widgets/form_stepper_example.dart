@@ -31,9 +31,12 @@ class FirstStepModel {
   final exampleTextController = TextEditingController();
 }
 
-class _FirstStep extends FormStep {
+class _FirstStep extends StatelessWidget implements FormStep {
 
-  _FirstStep() : super(title: "First step");
+  _FirstStep();
+
+  @override
+  String get title => "First step";
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +69,8 @@ class _FirstStep extends FormStep {
   }
 }
 
-class _SecondStep extends FormStep {
-  _SecondStep() : super(title: "Second step");
+class _SecondStep extends StatelessWidget implements FormStep {
+  _SecondStep();
 
   @override
   Widget build(BuildContext context) {
@@ -75,16 +78,22 @@ class _SecondStep extends FormStep {
   }
 
   @override
+  String get title => "Second step";
+
+  @override
   bool validate() => true;
 }
 
-class _ThirdStep extends FormStep {
-  _ThirdStep() : super(title: "Third step");
+class _ThirdStep extends StatelessWidget implements FormStep {
+  _ThirdStep();
 
   @override
   Widget build(BuildContext context) {
     return Text("Third step state");
   }
+
+  @override
+  String get title => "Third step";
 
   @override
   bool validate() => true;

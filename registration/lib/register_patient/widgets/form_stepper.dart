@@ -15,6 +15,15 @@ class FormStepper extends StatefulWidget {
   _FormStepperState createState() => _FormStepperState();
 }
 
+/// References
+/// - https://stackoverflow.com/questions/57995591/manage-multiple-form-validation-in-stepper-flutter/58004730
+/// - https://flutter.dev/docs/cookbook/forms/validation
+/// - https://flutter.dev/docs/cookbook/forms/retrieve-input
+abstract class FormStep implements Widget {
+  String get title;
+  bool validate();
+}
+
 class _FormStepperState extends State<FormStepper> {
   int _currentStep = 0;
 
@@ -212,14 +221,3 @@ class _InactiveIndexBubble extends StatelessWidget {
   }
 }
 
-/// References
-/// - https://stackoverflow.com/questions/57995591/manage-multiple-form-validation-in-stepper-flutter/58004730
-/// - https://flutter.dev/docs/cookbook/forms/validation
-/// - https://flutter.dev/docs/cookbook/forms/retrieve-input
-abstract class FormStep extends StatelessWidget {
-  final String title;
-
-  FormStep({this.title});
-
-  bool validate();
-}
