@@ -1,5 +1,7 @@
 # Hospital Administration
 
+[![CodeScene Code Health](https://codescene.io/projects/10126/status-badges/code-health)](https://codescene.io/projects/10126)
+
 The purpose of this project is to support the administrative work in the [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/).
 
 ## Architecture
