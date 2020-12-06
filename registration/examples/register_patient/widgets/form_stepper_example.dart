@@ -1,5 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration/register_patient/widgets/form_stepper.dart';
+import 'package:registration/register_patient/widgets/stepper_cubit.dart';
 import 'package:registration/test_bench.dart';
 
 void main() {
@@ -9,15 +12,18 @@ void main() {
   var secondStep = _SecondStep();
   var thirdStep = _ThirdStep();
 
+  List<FormStep> steps = [
+    firstStep,
+    secondStep,
+    thirdStep,
+  ];
   runApp(
     TestBench(
-      child: FormStepper(
-        steps: [
-          firstStep,
-          secondStep,
-          thirdStep,
-        ],
-      ),
+      child: BlocProvider(
+          create: (BuildContext context) => StepperCubit(steps.length),
+          child: FormStepper(
+            steps: steps,
+          )),
     ),
   );
 }
@@ -32,7 +38,6 @@ class FirstStepModel {
 }
 
 class _FirstStep extends StatelessWidget implements FormStep {
-
   _FirstStep();
 
   @override
@@ -68,6 +73,8 @@ class _FirstStep extends StatelessWidget implements FormStep {
     }
   }
 }
+
+
 
 class _SecondStep extends StatelessWidget implements FormStep {
   _SecondStep();

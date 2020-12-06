@@ -1,18 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:registration/register_patient/widgets/stepper_cubit.dart';
 
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
-class FormStepper extends StatefulWidget {
+class FormStepper extends StatelessWidget {
   final List<FormStep> steps;
 
   FormStepper({
     @required this.steps,
   }) : assert(steps != null);
 
+
   @override
-  _FormStepperState createState() => _FormStepperState();
+  Widget build(BuildContext context) {
+    return BlocBuilder<StepperCubit, StepperState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            _Header(
+              stepTitles: steps.map((s) => s.title).toList(),
+              currentStep: state.index,
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
+                  child: steps[state.index],
+                ),
+              ),
+            ),
+            _ActionButtons(),
+          ],
+        );
+      }
+    );
+  }
+  
 }
 
 /// References
@@ -22,65 +49,6 @@ class FormStepper extends StatefulWidget {
 abstract class FormStep implements Widget {
   String get title;
   bool validate();
-}
-
-class _FormStepperState extends State<FormStepper> {
-  int _currentStep = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _Header(
-          stepTitles: widget.steps.map((s) => s.title).toList(),
-          currentStep: currentStep,
-        ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
-              child: widget.steps[currentStep],
-            ),
-          ),
-        ),
-        _ActionButtons(
-          onBack: goToPreviousStep,
-          onContinue: goToNextStep,
-        ),
-      ],
-    );
-  }
-
-  void goToPreviousStep() {
-    if (widget.steps[currentStep].validate()) {
-      setState(() {
-        if (currentStep != 0) {
-          currentStep = currentStep - 1;
-        }
-      });
-    }
-  }
-
-  void goToNextStep() {
-    if (widget.steps[currentStep].validate()) {
-      setState(() {
-        if (currentStep != widget.steps.length - 1) {
-          currentStep = currentStep + 1;
-        }
-      });
-    }
-  }
-
-  int get currentStep {
-    return _currentStep;
-  }
-
-  set currentStep(int value) {
-    assert(value >= 0);
-    assert(value < widget.steps.length);
-    _currentStep = value;
-  }
 }
 
 class _Header extends StatelessWidget {
@@ -119,11 +87,8 @@ class _Header extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-  final Function onBack;
-  final Function onCancel;
-  final Function onContinue;
 
-  _ActionButtons({this.onBack, this.onCancel, this.onContinue});
+  _ActionButtons();
 
   @override
   Widget build(BuildContext context) {
@@ -133,14 +98,14 @@ class _ActionButtons extends StatelessWidget {
         children: [
           RaisedButton(
             child: Text("Back"),
-            onPressed: onBack,
+            onPressed: () => context.read<StepperCubit>().back(),
           ),
           Expanded(
             child: Container(),
           ),
           RaisedButton(
             child: Text("Cancel"),
-            onPressed: () {},
+            onPressed: () => print("TODO: Support stepper cancellation"),
           ),
           SizedBox(
             width: 20,
@@ -151,7 +116,7 @@ class _ActionButtons extends StatelessWidget {
               "Continue",
               style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
-            onPressed: onContinue,
+            onPressed: () => context.read<StepperCubit>().next(),
           ),
         ],
       ),
