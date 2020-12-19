@@ -2,7 +2,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration/register_patient/widgets/form_stepper.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/form_stepper.dart';
+
 
 
 class FormStep {

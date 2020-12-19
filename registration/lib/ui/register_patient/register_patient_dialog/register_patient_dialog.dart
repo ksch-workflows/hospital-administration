@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:registration/register_patient/widgets/form_stepper.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/form_stepper.dart';
+
 
 GetIt getIt = GetIt.instance;
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registration/dashboard.dart';
+import 'package:registration/ui/dashboard/dashboard.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/test_bench.dart';
 

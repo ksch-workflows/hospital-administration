@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration/register_patient/widgets/stepper_cubit.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/stepper_cubit.dart';
 
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#

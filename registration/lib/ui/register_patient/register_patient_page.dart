@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import 'package:registration/dashboard.dart';
-import 'package:registration/register_patient/patient.dart';
-import 'package:registration/register_patient/widgets/register_patient_dialog.dart';
+import 'package:registration/core/models/patient.dart';
+import 'package:registration/ui/dashboard/dashboard.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/register_patient_dialog.dart';
 
 class RegisterPatientPage extends StatefulWidget {
   @override
