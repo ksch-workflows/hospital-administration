@@ -9,46 +9,39 @@ import 'package:registration/register_patient/widgets/stepper_cubit.dart';
 class FormStepper extends StatelessWidget {
   final List<FormStep> steps;
 
-  FormStepper({
-    @required this.steps,
-  }) : assert(steps != null);
-
+  FormStepper({@required this.steps}) : assert(steps != null);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StepperCubit, StepperState>(
-      builder: (context, state) {
-        return Column(
-          children: [
-            _Header(
-              stepTitles: steps.map((s) => s.title).toList(),
-              currentStep: state.index,
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
-                  child: steps[state.index],
-                ),
+    return BlocBuilder<StepperCubit, StepperState>(builder: (context, state) {
+      return Column(
+        children: [
+          _Header(
+            stepTitles: steps.map((s) => s.widget.title).toList(),
+            currentStep: state.index,
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
+                child: state.formStep.widget,
               ),
             ),
-            _ActionButtons(),
-          ],
-        );
-      }
-    );
+          ),
+          _ActionButtons(),
+        ],
+      );
+    });
   }
-  
 }
 
 /// References
 /// - https://stackoverflow.com/questions/57995591/manage-multiple-form-validation-in-stepper-flutter/58004730
 /// - https://flutter.dev/docs/cookbook/forms/validation
 /// - https://flutter.dev/docs/cookbook/forms/retrieve-input
-abstract class FormStep implements Widget {
+abstract class FormStepWidget implements Widget {
   String get title;
-  bool validate();
 }
 
 class _Header extends StatelessWidget {
@@ -87,7 +80,6 @@ class _Header extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-
   _ActionButtons();
 
   @override
@@ -185,4 +177,3 @@ class _InactiveIndexBubble extends StatelessWidget {
     );
   }
 }
-

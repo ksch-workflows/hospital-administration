@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:registration/dashboard.dart';
-import "package:registration/register_patient/model/patient.dart";
+import 'package:registration/register_patient/patient.dart';
 import 'package:registration/register_patient/widgets/register_patient_dialog.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';

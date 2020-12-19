@@ -27,9 +27,9 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
           constraints: BoxConstraints.tight(Size(800, 400)),
           child: FormStepper(
             steps: [
-              _PersonalDataForm(),
-              _ContactInformationForm(),
-              _VisitTypeForm(),
+//              _PersonalDataForm(),
+//              _ContactInformationForm(),
+//              _VisitTypeForm(),
             ],
           ),
         ),
@@ -59,7 +59,7 @@ class _VisitTypeModel {
   final formKey = GlobalKey<FormState>();
 }
 
-class _PersonalDataForm extends StatelessWidget implements FormStep {
+class _PersonalDataForm extends StatelessWidget implements FormStepWidget {
   final _PersonalDataModel formModel = getIt<_RegisterPatientDialogModel>().personalData;
 
   _PersonalDataForm();
@@ -82,7 +82,7 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
           },
           decoration: InputDecoration(
               labelText: "Patient's name*",
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               hintText: "Please enter the patient's name",
               helperText: "* Required"),
         ),
@@ -93,7 +93,7 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
           controller: formModel.fatherNameFieldController,
           decoration: InputDecoration(
             labelText: "Father's name",
-            border: OutlineInputBorder(),
+            border: const OutlineInputBorder(),
             hintText: "Please enter the patient father's name, if applicable",
           ),
         ),
@@ -101,7 +101,6 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
     );
   }
 
-  @override
   bool validate() {
     var currentState = formModel.formKey.currentState;
     if (currentState != null) {
@@ -112,7 +111,7 @@ class _PersonalDataForm extends StatelessWidget implements FormStep {
   }
 }
 
-class _ContactInformationForm extends StatelessWidget implements FormStep {
+class _ContactInformationForm extends StatelessWidget implements FormStepWidget {
   final _ContactInformationModel formModel = getIt<_RegisterPatientDialogModel>().contactInformation;
   
   _ContactInformationForm();
@@ -154,7 +153,7 @@ class _ContactInformationForm extends StatelessWidget implements FormStep {
   }
 }
 
-class _VisitTypeForm extends StatelessWidget implements FormStep {
+class _VisitTypeForm extends StatelessWidget implements FormStepWidget {
   _VisitTypeForm();
 
   @override

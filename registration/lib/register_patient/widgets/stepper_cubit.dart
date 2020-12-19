@@ -2,36 +2,55 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:registration/register_patient/widgets/form_stepper.dart';
+
+
+class FormStep {
+  final FormStepWidget widget;
+  final FormStepModel model;
+  
+  FormStep(this.widget, this.model);
+}
+
+abstract class FormStepModel {
+  bool validate();
+}
 
 class StepperCubit extends Cubit<StepperState> {
-  final int numberOfSteps;
+  final List<FormStep> steps;
 
-  StepperCubit(this.numberOfSteps) : super(FirstStep());
+  StepperCubit(this.steps) : super(FirstStep(formStep: steps[0]));
 
   void back() {
+    if (!state.validate()) {
+      return;
+    }
     final currentIndex = state.index;
     if (currentIndex == 0) {
       return;
     }
     final newIndex = currentIndex - 1;
     if (newIndex == 0) {
-      emit(FirstStep());
+      emit(FirstStep(formStep: steps[0]));
     } else {
-      emit(IntermediateStep(newIndex));
+      emit(IntermediateStep(formStep: steps[newIndex], index: newIndex));
     }
   }
 
   void next() {
+    if (!state.validate()) {
+      return;
+    }
     final currentIndex = state.index;
-    if (currentIndex == numberOfSteps - 1) {
+    if (currentIndex == steps.length - 1) {
       emit(Finished());
       return;
     }
     final newIndex = currentIndex + 1;
-    if (newIndex == numberOfSteps - 1) {
-      emit(LastStep(newIndex));
+    if (newIndex == steps.length - 1) {
+      emit(LastStep(formStep: steps[newIndex], index: newIndex));
     } else {
-      emit(IntermediateStep(newIndex));
+      emit(IntermediateStep(formStep: steps[newIndex], index: newIndex));
     }
   }
 }
@@ -39,31 +58,37 @@ class StepperCubit extends Cubit<StepperState> {
 @immutable
 abstract class StepperState extends Equatable {
   int get index;
+  FormStep get formStep;
 
   @override
   List<Object> get props => [index];
+
+  bool validate() => formStep.model.validate();
 }
 
 class FirstStep extends StepperState {
+  final FormStep formStep;
+
+  FirstStep({@required this.formStep});
+
   int get index => 0;
 }
 
 class IntermediateStep extends StepperState {
-  final int _index;
+  final int index;
+  final FormStep formStep;
 
-  IntermediateStep(this._index);
-
-  int get index => _index;
+  IntermediateStep({@required this.formStep, @required this.index});
 }
 
 class LastStep extends StepperState {
-  final int _index;
+  final int index;
+  final FormStep formStep;
 
-  LastStep(this._index);
-
-  int get index => _index;
+  LastStep({@required this.formStep, @required this.index});
 }
 
 class Finished extends StepperState {
   int get index => -1;
+  FormStep get formStep => null;
 }

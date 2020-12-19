@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration/register_patient/widgets/form_stepper.dart';
@@ -8,38 +7,56 @@ import 'package:registration/test_bench.dart';
 void main() {
   getIt.registerSingleton<_ExampleFormModel>(_ExampleFormModel());
 
-  var firstStep = _FirstStep();
-  var secondStep = _SecondStep();
-  var thirdStep = _ThirdStep();
-
-  List<FormStep> steps = [
-    firstStep,
-    secondStep,
-    thirdStep,
+  final List<FormStep> steps = [
+    FormStep(FirstStepWidget(), FirstStepModel()),
+    FormStep(FirstStepWidget(), FirstStepModel()),
   ];
-  runApp(
-    TestBench(
-      child: BlocProvider(
-          create: (BuildContext context) => StepperCubit(steps.length),
-          child: FormStepper(
-            steps: steps,
-          )),
+
+  runApp(TestBench(
+    child: BlocProvider(
+      create: (BuildContext context) => StepperCubit(steps), // TODO Move down bloc provider
+      child: FormStepper(
+        steps: steps,
+      ),
     ),
-  );
+  ));
 }
 
 class _ExampleFormModel {
   FirstStepModel firstStep = FirstStepModel();
 }
 
-class FirstStepModel {
+class FirstStepModel implements FormStepModel {
   final formKey = GlobalKey<FormState>();
   final exampleTextController = TextEditingController();
+
+  @override
+  bool validate() {
+    var currentState = formKey.currentState;
+    if (currentState == null) {
+      return true;
+    } else {
+      return currentState.validate();
+    }
+  }
 }
 
-class _FirstStep extends StatelessWidget implements FormStep {
-  _FirstStep();
+class SecondStepModel implements FormStepModel {
+  final formKey = GlobalKey<FormState>();
+  final exampleTextController = TextEditingController();
 
+  @override
+  bool validate() {
+    var currentState = formKey.currentState;
+    if (currentState == null) {
+      return true;
+    } else {
+      return currentState.validate();
+    }
+  }
+}
+
+class FirstStepWidget extends StatelessWidget implements FormStepWidget, FormStep {
   @override
   String get title => "First step";
 
@@ -63,45 +80,9 @@ class _FirstStep extends StatelessWidget implements FormStep {
   }
 
   @override
-  bool validate() {
-    var model = getIt<_ExampleFormModel>().firstStep;
-    var currentState = model.formKey.currentState;
-    if (currentState != null) {
-      return currentState.validate();
-    } else {
-      return true;
-    }
-  }
-}
-
-
-
-class _SecondStep extends StatelessWidget implements FormStep {
-  _SecondStep();
+  // TODO: implement model
+  FormStepModel get model => throw UnimplementedError();
 
   @override
-  Widget build(BuildContext context) {
-    return Text("Second step state");
-  }
-
-  @override
-  String get title => "Second step";
-
-  @override
-  bool validate() => true;
-}
-
-class _ThirdStep extends StatelessWidget implements FormStep {
-  _ThirdStep();
-
-  @override
-  Widget build(BuildContext context) {
-    return Text("Third step state");
-  }
-
-  @override
-  String get title => "Third step";
-
-  @override
-  bool validate() => true;
+  FormStepWidget get widget => this;
 }
