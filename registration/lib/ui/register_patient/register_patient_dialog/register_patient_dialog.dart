@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:registration/ui/register_patient/register_patient_dialog/form_stepper.dart';
+import 'package:registration/util/singleton_bucket.dart';
 
-GetIt getIt = GetIt.instance;
 
-_RegisterPatientDialogModel kRegisterPatientDialogModel = _RegisterPatientDialogModel();
+class _RegisterPatientDialogModel {
+  final visitTypeSelection = FormValue<String>();
+  final nameController = TextEditingController();
+}
 
+/// Intended for usage with, e.g.
+/// - https://api.flutter.dev/flutter/material/Checkbox-class.html
+/// - https://api.flutter.dev/flutter/material/Switch-class.html
+/// - https://api.flutter.dev/flutter/material/Radio-class.html
+class FormValue<T> {
+  T value;
+}
 
 class RegisterPatientDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
 }
 
-class _RegisterPatientDialogModel {
-  final visitTypeSelection = DropdownButtonSelection<String>();
-  final nameController = TextEditingController();
-}
-
 class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
-
   List<FormStep> _steps;
+  final _registerPatientDialogModel = SingletonBucket.get(() => _RegisterPatientDialogModel());
 
   @override
   void initState() {
     super.initState();
 
-    kRegisterPatientDialogModel.visitTypeSelection.value = "Some dummy value";
-
     _steps = [
-      PersonalDataFormStep(nameController: kRegisterPatientDialogModel.nameController),
-      VisitTypeFormStep(visitTypeSelection: kRegisterPatientDialogModel.visitTypeSelection),
+      PersonalDataFormStep(nameController: _registerPatientDialogModel.nameController),
+      VisitTypeFormStep(visitTypeSelection: _registerPatientDialogModel.visitTypeSelection),
     ];
   }
 
@@ -47,10 +50,6 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
       ],
     );
   }
-}
-
-class DropdownButtonSelection<T> {
-  T value;
 }
 
 class PersonalDataFormStep implements FormStep {
@@ -78,7 +77,7 @@ class PersonalDataFormStep implements FormStep {
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
-  final DropdownButtonSelection<String> visitTypeSelection;
+  final FormValue<String> visitTypeSelection;
 
   VisitTypeFormStep({this.visitTypeSelection});
 
@@ -97,7 +96,7 @@ class VisitTypeFormStep implements FormStep {
 }
 
 class _VisitTypeFormStepBody extends StatefulWidget {
-  final DropdownButtonSelection<String> visitTypeSelection;
+  final FormValue<String> visitTypeSelection;
 
   _VisitTypeFormStepBody({this.visitTypeSelection});
 
