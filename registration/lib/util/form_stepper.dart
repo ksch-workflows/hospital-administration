@@ -25,8 +25,18 @@ class FormStepper extends StatefulWidget {
 }
 
 class _FormStepperState extends State<FormStepper> {
+  int currentIndex;
+  FormStep currentStep;
 
-  int currentStep = 0;
+  _FormStepperState({int initialStepIndex = 0}) {
+    currentIndex = initialStepIndex;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentStep = widget.steps[currentIndex];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,20 +44,44 @@ class _FormStepperState extends State<FormStepper> {
       children: [
         _Header(
           stepTitles: widget.steps.map((s) => s.title).toList(),
-          currentStep: currentStep,
+          currentStep: currentIndex,
         ),
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
-              child: widget.steps[currentStep].body,
+              child: widget.steps[currentIndex].body,
             ),
           ),
         ),
-        _ActionButtons(),
+        _ActionButtons(
+          onBack: onBack,
+          onCancel: onCancel,
+          onContinue: onContinue,
+        ),
       ],
     );
+  }
+
+  void onBack() {
+    if (currentIndex > 0) {
+      setState(() {
+        currentIndex--;
+        currentStep = widget.steps[currentIndex];
+      });
+    }
+  }
+
+  void onCancel() {}
+
+  void onContinue() {
+    if (currentIndex < widget.steps.length - 1) {
+      setState(() {
+        currentIndex++;
+        currentStep = widget.steps[currentIndex];
+      });
+    }
   }
 }
 
@@ -95,7 +129,14 @@ class _Header extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-  _ActionButtons();
+  final Function onBack;
+  final Function onCancel;
+  final Function onContinue;
+
+  _ActionButtons({@required this.onBack, @required this.onCancel, @required this.onContinue})
+      : assert(onBack != null),
+        assert(onCancel != null),
+        assert(onContinue != null);
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +146,14 @@ class _ActionButtons extends StatelessWidget {
         children: [
           RaisedButton(
             child: Text("Back"),
-            onPressed: () => throw UnimplementedError(),
+            onPressed: onBack,
           ),
           Expanded(
             child: Container(),
           ),
           RaisedButton(
             child: Text("Cancel"),
-            onPressed: () => throw UnimplementedError(),
+            onPressed: onCancel,
           ),
           SizedBox(
             width: 20,
@@ -123,7 +164,7 @@ class _ActionButtons extends StatelessWidget {
               "Continue",
               style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
-            onPressed: () => throw UnimplementedError(),
+            onPressed: onContinue,
           ),
         ],
       ),

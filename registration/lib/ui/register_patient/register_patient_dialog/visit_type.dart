@@ -34,6 +34,6 @@ class _VisitTypeFormStepBody extends StatefulWidget {
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(widget.visitTypeSelection.value));
+    return Container(child: Text("<visit type placeholder>"));
   }
 }
