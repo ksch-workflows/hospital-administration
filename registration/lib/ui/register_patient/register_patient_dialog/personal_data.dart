@@ -50,7 +50,5 @@ class PersonalDataFormStep implements FormStep {
   }
 
   @override
-  bool validate() {
-    return true;
-  }
+  bool validate() => formKey.currentState.validate();
 }

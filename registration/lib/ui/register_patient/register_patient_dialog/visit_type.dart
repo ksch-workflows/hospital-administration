@@ -12,80 +12,88 @@ class VisitTypeFormStep implements FormStep {
   String get title => "Visit type";
 
   @override
-  bool validate() {
-    return true;
-  }
+  bool validate() => _formKey.currentState.validate();
 
   @override
-  Widget get body => _VisitTypeFormStepBody(visitTypeSelection: visitTypeSelection);
+  Widget get body => _VisitTypeFormStepBody(
+        formKey: _formKey,
+        visitTypeSelection: visitTypeSelection,
+      );
 }
 
 class _VisitTypeFormStepBody extends StatefulWidget {
+  final GlobalKey<FormState> formKey;
   final FormValue<String> visitTypeSelection;
 
-  _VisitTypeFormStepBody({this.visitTypeSelection});
+  _VisitTypeFormStepBody({this.formKey, this.visitTypeSelection});
 
   @override
-  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState(visitTypeSelection: visitTypeSelection);
+  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState(
+        formKey: formKey,
+        visitTypeSelection: visitTypeSelection,
+      );
 }
 
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
+  final GlobalKey<FormState> formKey;
   final FormValue<String> visitTypeSelection;
 
-  _VisitTypeFormStepBodyState({@required this.visitTypeSelection}) : assert(visitTypeSelection != null);
+  _VisitTypeFormStepBodyState({
+    @required this.formKey,
+    @required this.visitTypeSelection,
+  })  : assert(formKey != null),
+        assert(visitTypeSelection != null);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            Expanded(
-              child: InputDecorator(
-                decoration: InputDecoration(
-                  labelText:  visitTypeSelection.value != null ? "Visit type" : null,
-                  border: const OutlineInputBorder(),
-                  contentPadding: EdgeInsets.only(left: 10)
-                  //contentPadding: EdgeInsets.only(left: 10),
-                ),
-                child: Container(
-                  // padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  // decoration: BoxDecoration(
-                  //   borderRadius: BorderRadius.circular(3),
-                  //   border: Border.all(
-                  //     color: Colors.grey[500],
-                  //   ),
-                  // ),
-                  // decoration: BoxDecoration(
-                  //
-                  //     border: Border.all()),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: visitTypeSelection.value,
-                      icon: Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: Colors.deepPurple),
-                      hint: Text("Please select a visit type..."),
-                      onChanged: (String newValue) {
-                        setState(() {
-                          visitTypeSelection.value = newValue;
-                        });
-                      },
-                      items: <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+    return Form(
+      key: formKey,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                      labelText: visitTypeSelection.value != null ? "Visit type" : null,
+                      border: const OutlineInputBorder(),
+                      contentPadding: const EdgeInsets.only(left: 10)),
+                  child: Container(
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButtonFormField<String>(
+                        value: visitTypeSelection.value,
+                        icon: const Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        hint: const Text("Please select a visit type..."),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            visitTypeSelection.value = newValue;
+                          });
+                        },
+                        items: <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Please select a visit type";
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

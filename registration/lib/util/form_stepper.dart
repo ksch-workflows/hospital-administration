@@ -65,6 +65,9 @@ class _FormStepperState extends State<FormStepper> {
   }
 
   void onBack() {
+    if (!currentStep.validate()) {
+      return;
+    }
     if (currentIndex > 0) {
       setState(() {
         currentIndex--;
@@ -76,6 +79,9 @@ class _FormStepperState extends State<FormStepper> {
   void onCancel() {}
 
   void onContinue() {
+    if (!currentStep.validate()) {
+      return;
+    }
     if (currentIndex < widget.steps.length - 1) {
       setState(() {
         currentIndex++;
