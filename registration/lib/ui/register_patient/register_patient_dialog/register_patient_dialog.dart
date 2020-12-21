@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/personal_data_form.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/visit_type_form.dart';
 
 import 'package:registration/util/form_stepper.dart';
 import 'package:registration/util/form_value.dart';
 import 'package:registration/util/singleton_bucket.dart';
-
-
-class _RegisterPatientDialogModel {
-  final visitTypeSelection = FormValue<String>();
-  final nameController = TextEditingController();
-}
 
 class RegisterPatientDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
 }
 
+class _RegisterPatientDialogModel {
+  final visitTypeSelection = FormValue<String>();
+  final nameController = TextEditingController();
+}
+
 class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
-  List<FormStep> _steps;
   final _registerPatientDialogModel = SingletonBucket.get(() => _RegisterPatientDialogModel());
+
+  List<FormStep> _steps;
 
   @override
   void initState() {
     super.initState();
 
     _steps = [
-      PersonalDataFormStep(nameController: _registerPatientDialogModel.nameController),
-      VisitTypeFormStep(visitTypeSelection: _registerPatientDialogModel.visitTypeSelection),
+      PersonalDataFormStep(
+        nameController: _registerPatientDialogModel.nameController,
+      ),
+      VisitTypeFormStep(
+        visitTypeSelection: _registerPatientDialogModel.visitTypeSelection,
+      ),
     ];
   }
 
@@ -42,64 +48,5 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
         ),
       ],
     );
-  }
-}
-
-class PersonalDataFormStep implements FormStep {
-  final TextEditingController nameController;
-
-  PersonalDataFormStep({this.nameController});
-
-  @override
-  String get title => "Personal data";
-
-  @override
-  Widget get body => Column(
-        children: [
-          TextField(
-            controller: nameController,
-          )
-        ],
-      );
-
-  @override
-  bool validate() {
-    return true;
-  }
-}
-
-class VisitTypeFormStep implements FormStep {
-  final _formKey = GlobalKey<FormState>();
-  final FormValue<String> visitTypeSelection;
-
-  VisitTypeFormStep({this.visitTypeSelection});
-
-  @override
-  String get title => "Visit type";
-
-  @override
-  bool validate() {
-    return _formKey.currentState.validate();
-  }
-
-  @override
-  Widget get body => _VisitTypeFormStepBody(
-        visitTypeSelection: visitTypeSelection,
-      );
-}
-
-class _VisitTypeFormStepBody extends StatefulWidget {
-  final FormValue<String> visitTypeSelection;
-
-  _VisitTypeFormStepBody({this.visitTypeSelection});
-
-  @override
-  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState();
-}
-
-class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(child: Text(widget.visitTypeSelection.value));
   }
 }

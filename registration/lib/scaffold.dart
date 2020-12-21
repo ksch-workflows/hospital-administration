@@ -157,6 +157,7 @@ void main() {
   runApp(
     TestBench(
       child: WebScaffold(
+        title: "Hello",
         body: Row(
           children: [
             const Text('Hello, Test Bench!'),
