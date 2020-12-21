@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registration/ui/register_patient/register_patient_dialog/form_stepper.dart';
+import 'package:registration/util/form_stepper.dart';
 
 class VisitTypeForm extends StatelessWidget implements FormStepWidget {
   VisitTypeForm();

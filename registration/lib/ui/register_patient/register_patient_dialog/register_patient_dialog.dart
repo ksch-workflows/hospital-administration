@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:registration/ui/register_patient/register_patient_dialog/form_stepper.dart';
+import 'package:registration/util/form_stepper.dart';
+import 'package:registration/util/form_value.dart';
 import 'package:registration/util/singleton_bucket.dart';
 
 
 class _RegisterPatientDialogModel {
   final visitTypeSelection = FormValue<String>();
   final nameController = TextEditingController();
-}
-
-/// Intended for usage with, e.g.
-/// - https://api.flutter.dev/flutter/material/Checkbox-class.html
-/// - https://api.flutter.dev/flutter/material/Switch-class.html
-/// - https://api.flutter.dev/flutter/material/Radio-class.html
-class FormValue<T> {
-  T value;
 }
 
 class RegisterPatientDialog extends StatefulWidget {
