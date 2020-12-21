@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/contact_information.dart';
 import 'package:registration/ui/register_patient/register_patient_dialog/personal_data.dart';
 import 'package:registration/ui/register_patient/register_patient_dialog/visit_type.dart';
 
@@ -14,10 +15,11 @@ class RegisterPatientDialog extends StatefulWidget {
 class _RegisterPatientDialogModel {
   final visitTypeSelection = FormValue<String>();
   final nameController = TextEditingController();
+  final locationController = TextEditingController();
 }
 
 class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
-  final _registerPatientDialogModel = SingletonBucket.get(() => _RegisterPatientDialogModel());
+  final _model = SingletonBucket.get(() => _RegisterPatientDialogModel());
 
   List<FormStep> _steps;
 
@@ -27,10 +29,13 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
 
     _steps = [
       PersonalDataFormStep(
-        nameController: _registerPatientDialogModel.nameController,
+        nameController: _model.nameController,
+      ),
+      ContactInformationFormStep(
+        locationController: _model.locationController,
       ),
       VisitTypeFormStep(
-        visitTypeSelection: _registerPatientDialogModel.visitTypeSelection,
+        visitTypeSelection: _model.visitTypeSelection,
       ),
     ];
   }

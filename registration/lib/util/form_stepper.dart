@@ -15,25 +15,33 @@ abstract class FormStep {
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
 /// - https://flutter.dev/docs/cookbook/forms
-class FormStepper extends StatelessWidget {
+class FormStepper extends StatefulWidget {
   final List<FormStep> steps;
 
   FormStepper({@required this.steps}) : assert(steps != null);
+
+  @override
+  _FormStepperState createState() => _FormStepperState();
+}
+
+class _FormStepperState extends State<FormStepper> {
+
+  int currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _Header(
-          stepTitles: steps.map((s) => s.title).toList(),
-          currentStep: 0,
+          stepTitles: widget.steps.map((s) => s.title).toList(),
+          currentStep: currentStep,
         ),
         Expanded(
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
-              child: steps[0].body,
+              child: widget.steps[currentStep].body,
             ),
           ),
         ),
