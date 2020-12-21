@@ -13,13 +13,11 @@ class VisitTypeFormStep implements FormStep {
 
   @override
   bool validate() {
-    return _formKey.currentState.validate();
+    return true;
   }
 
   @override
-  Widget get body => _VisitTypeFormStepBody(
-        visitTypeSelection: visitTypeSelection,
-      );
+  Widget get body => _VisitTypeFormStepBody(visitTypeSelection: visitTypeSelection);
 }
 
 class _VisitTypeFormStepBody extends StatefulWidget {
@@ -28,12 +26,42 @@ class _VisitTypeFormStepBody extends StatefulWidget {
   _VisitTypeFormStepBody({this.visitTypeSelection});
 
   @override
-  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState();
+  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState(visitTypeSelection: visitTypeSelection);
 }
 
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
+  final FormValue<String> visitTypeSelection;
+
+  _VisitTypeFormStepBodyState({@required this.visitTypeSelection}): assert(visitTypeSelection != null);
+
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("<visit type placeholder>"));
+    return Column(
+      children: [
+        DropdownButton<String>(
+          value: visitTypeSelection.value,
+          icon: Icon(Icons.arrow_downward),
+          iconSize: 24,
+          elevation: 16,
+          style: TextStyle(color: Colors.deepPurple),
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
+          ),
+          onChanged: (String newValue) {
+            setState(() {
+              visitTypeSelection.value = newValue;
+            });
+          },
+          items: <String>['One', 'Two', 'Free', 'Four']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+      ],
+    );
   }
 }

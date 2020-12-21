@@ -15,6 +15,7 @@ class RegisterPatientDialog extends StatefulWidget {
 class _RegisterPatientDialogModel {
   final visitTypeSelection = FormValue<String>();
   final nameController = TextEditingController();
+  final fatherNameController = TextEditingController();
   final locationController = TextEditingController();
 }
 
@@ -30,6 +31,7 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
     _steps = [
       PersonalDataFormStep(
         nameController: _model.nameController,
+        fatherNameController: _model.fatherNameController,
       ),
       ContactInformationFormStep(
         locationController: _model.locationController,
