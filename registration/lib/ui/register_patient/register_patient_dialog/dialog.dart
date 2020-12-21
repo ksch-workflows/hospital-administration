@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:registration/ui/register_patient/register_patient_dialog/personal_data_form.dart';
-import 'package:registration/ui/register_patient/register_patient_dialog/visit_type_form.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/personal_data.dart';
+import 'package:registration/ui/register_patient/register_patient_dialog/visit_type.dart';
 
 import 'package:registration/util/form_stepper.dart';
 import 'package:registration/util/form_value.dart';
