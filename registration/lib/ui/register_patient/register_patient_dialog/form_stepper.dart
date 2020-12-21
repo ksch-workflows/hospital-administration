@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration/ui/register_patient/register_patient_dialog/stepper_cubit.dart';
+
+
+/// see https://flutter.dev/docs/cookbook/forms
+abstract class FormStep {
+  String get title;
+
+  /// see
+  Widget get body;
+  bool validate();
+}
 
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
+/// - https://flutter.dev/docs/cookbook/forms
 class FormStepper extends StatelessWidget {
   final List<FormStep> steps;
 
@@ -13,26 +23,24 @@ class FormStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<StepperCubit, StepperState>(builder: (context, state) {
-      return Column(
-        children: [
-          _Header(
-            stepTitles: steps.map((s) => s.widget.title).toList(),
-            currentStep: state.index,
-          ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
-                child: state.formStep.widget,
-              ),
+    return Column(
+      children: [
+        _Header(
+          stepTitles: steps.map((s) => s.title).toList(),
+          currentStep: 0,
+        ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(25, 30, 25, 20),
+              child: steps[0].body,
             ),
           ),
-          _ActionButtons(),
-        ],
-      );
-    });
+        ),
+        _ActionButtons(),
+      ],
+    );
   }
 }
 
@@ -90,14 +98,14 @@ class _ActionButtons extends StatelessWidget {
         children: [
           RaisedButton(
             child: Text("Back"),
-            onPressed: () => context.read<StepperCubit>().back(),
+            onPressed: () => throw UnimplementedError(),
           ),
           Expanded(
             child: Container(),
           ),
           RaisedButton(
             child: Text("Cancel"),
-            onPressed: () => print("TODO: Support stepper cancellation"),
+            onPressed: () => throw UnimplementedError(),
           ),
           SizedBox(
             width: 20,
@@ -108,7 +116,7 @@ class _ActionButtons extends StatelessWidget {
               "Continue",
               style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
-            onPressed: () => context.read<StepperCubit>().next(),
+            onPressed: () => throw UnimplementedError(),
           ),
         ],
       ),
