@@ -3,13 +3,13 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 /// see https://flutter.dev/docs/cookbook/forms
 abstract class FormStep {
   String get title;
 
   /// see
   Widget get body;
+
   bool validate();
 }
 

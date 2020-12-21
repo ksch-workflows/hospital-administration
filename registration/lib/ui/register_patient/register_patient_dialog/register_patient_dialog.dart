@@ -4,31 +4,37 @@ import 'package:registration/ui/register_patient/register_patient_dialog/form_st
 
 GetIt getIt = GetIt.instance;
 
+_RegisterPatientDialogModel kRegisterPatientDialogModel = _RegisterPatientDialogModel();
+
+
 class RegisterPatientDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
 }
 
-class _RegisterPatientDialogState extends State<RegisterPatientDialog> with AutomaticKeepAliveClientMixin {
-  bool _submittedOrCanceled = false;
+class _RegisterPatientDialogModel {
+  final visitTypeSelection = DropdownButtonSelection<String>();
+  final nameController = TextEditingController();
+}
+
+class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
+
   List<FormStep> _steps;
-  DropdownButtonSelection<String> _visitTypeSelection;
 
   @override
   void initState() {
     super.initState();
 
-    _visitTypeSelection = DropdownButtonSelection<String>();
-    _visitTypeSelection.value = "Dummy value";
+    kRegisterPatientDialogModel.visitTypeSelection.value = "Some dummy value";
 
     _steps = [
-      VisitTypeFormStep(visitTypeSelection: _visitTypeSelection),
+      PersonalDataFormStep(nameController: kRegisterPatientDialogModel.nameController),
+      VisitTypeFormStep(visitTypeSelection: kRegisterPatientDialogModel.visitTypeSelection),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return SimpleDialog(
       title: Text("Register patient"),
       children: <Widget>[
@@ -41,20 +47,40 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> with Auto
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => !_submittedOrCanceled;
 }
 
 class DropdownButtonSelection<T> {
   T value;
 }
 
+class PersonalDataFormStep implements FormStep {
+  final TextEditingController nameController;
+
+  PersonalDataFormStep({this.nameController});
+
+  @override
+  String get title => "Personal data";
+
+  @override
+  Widget get body => Column(
+        children: [
+          TextField(
+            controller: nameController,
+          )
+        ],
+      );
+
+  @override
+  bool validate() {
+    return true;
+  }
+}
+
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
   final DropdownButtonSelection<String> visitTypeSelection;
-  
-  VisitTypeFormStep({ this.visitTypeSelection });
+
+  VisitTypeFormStep({this.visitTypeSelection});
 
   @override
   String get title => "Visit type";
@@ -65,13 +91,15 @@ class VisitTypeFormStep implements FormStep {
   }
 
   @override
-  Widget get body => _VisitTypeFormStepBody(visitTypeSelection: visitTypeSelection,);
+  Widget get body => _VisitTypeFormStepBody(
+        visitTypeSelection: visitTypeSelection,
+      );
 }
 
 class _VisitTypeFormStepBody extends StatefulWidget {
   final DropdownButtonSelection<String> visitTypeSelection;
 
-  _VisitTypeFormStepBody({ this.visitTypeSelection });
+  _VisitTypeFormStepBody({this.visitTypeSelection});
 
   @override
   _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState();
@@ -80,8 +108,6 @@ class _VisitTypeFormStepBody extends StatefulWidget {
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(widget.visitTypeSelection.value)
-    );
+    return Container(child: Text(widget.visitTypeSelection.value));
   }
 }

@@ -18,7 +18,6 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
