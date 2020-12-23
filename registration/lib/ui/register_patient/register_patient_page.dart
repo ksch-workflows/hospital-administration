@@ -17,6 +17,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient> matchingPatients;
 
   final ScrollController scrollController = ScrollController();
+  final TextEditingController searchTermController = TextEditingController();
   final PatientService patientService = GetIt.I<PatientService>();
   final VisitService visitService = GetIt.I<VisitService>();
 
@@ -41,6 +42,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       },
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          searchTermController.clear();
           RegisterPatientResult result = await showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -48,13 +50,9 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   onDialogClose: (RegisterPatientResult result) => Navigator.pop(context, result),
                 );
               });
-
           if (result != null) {
             var createdPatient = patientService.create(result.patient);
             visitService.startVisit(createdPatient.id);
-
-            // Start visit
-            // Open patient details page
             print("Patient created: ${createdPatient.id}");
           }
         },
@@ -129,6 +127,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           child: Container(
             width: 200,
             child: TextField(
+              controller: searchTermController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: "Search patient...",

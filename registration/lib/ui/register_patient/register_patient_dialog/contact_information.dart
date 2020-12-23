@@ -13,11 +13,50 @@ class ContactInformationFormStep implements FormStep {
 
   @override
   Widget get body {
+    return _ContactInformationForm(formKey: formKey, locationController: locationController);
+  }
+
+  @override
+  bool validate() => formKey.currentState.validate();
+}
+
+class _ContactInformationForm extends StatefulWidget {
+  const _ContactInformationForm({
+    @required this.formKey,
+    @required this.locationController,
+  });
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController locationController;
+
+  @override
+  _ContactInformationFormState createState() => _ContactInformationFormState();
+}
+
+class _ContactInformationFormState extends State<_ContactInformationForm> {
+  FocusNode initialFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    initialFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    initialFocus.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    initialFocus.requestFocus();
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(children: <Widget>[
         TextFormField(
-          controller: locationController,
+          controller: widget.locationController,
+          focusNode: initialFocus,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "The patient's location is required information.";
@@ -34,7 +73,4 @@ class ContactInformationFormStep implements FormStep {
       ]),
     );
   }
-
-  @override
-  bool validate() => formKey.currentState.validate();
 }

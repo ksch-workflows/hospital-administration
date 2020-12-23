@@ -17,11 +17,57 @@ class PersonalDataFormStep implements FormStep {
 
   @override
   Widget get body {
+    return _PersonalDataForm(
+      formKey: formKey,
+      nameController: nameController,
+      fatherNameController: fatherNameController,
+    );
+  }
+
+  @override
+  bool validate() => formKey.currentState.validate();
+}
+
+class _PersonalDataForm extends StatefulWidget {
+  const _PersonalDataForm({
+    Key key,
+    @required this.formKey,
+    @required this.nameController,
+    @required this.fatherNameController,
+  }) : super(key: key);
+
+  final GlobalKey<FormState> formKey;
+  final TextEditingController nameController;
+  final TextEditingController fatherNameController;
+
+  @override
+  _PersonalDataFormState createState() => _PersonalDataFormState();
+}
+
+class _PersonalDataFormState extends State<_PersonalDataForm> {
+  FocusNode initialFocus;
+
+  @override
+  void initState() {
+    super.initState();
+    initialFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    initialFocus.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    initialFocus.requestFocus();
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(children: <Widget>[
         TextFormField(
-          controller: nameController,
+          controller: widget.nameController,
+          focusNode: initialFocus,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return "The patient's name is required information.";
@@ -38,7 +84,7 @@ class PersonalDataFormStep implements FormStep {
           height: 15,
         ),
         TextFormField(
-          controller: fatherNameController,
+          controller: widget.fatherNameController,
           decoration: InputDecoration(
             labelText: "Father's name",
             border: const OutlineInputBorder(),
@@ -48,7 +94,4 @@ class PersonalDataFormStep implements FormStep {
       ]),
     );
   }
-
-  @override
-  bool validate() => formKey.currentState.validate();
 }

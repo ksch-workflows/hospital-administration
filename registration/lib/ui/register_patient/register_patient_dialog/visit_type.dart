@@ -8,7 +8,7 @@ class VisitTypeFormStep implements FormStep {
   VisitTypeFormStep({this.visitTypeSelection});
 
   @override
-  String get title => "visit.dart type";
+  String get title => "Visit type";
 
   @override
   bool validate() => _formKey.currentState.validate();
@@ -27,26 +27,29 @@ class _VisitTypeFormStepBody extends StatefulWidget {
   _VisitTypeFormStepBody({this.formKey, this.visitTypeSelection});
 
   @override
-  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState(
-        formKey: formKey,
-        visitTypeSelection: visitTypeSelection,
-      );
+  _VisitTypeFormStepBodyState createState() => _VisitTypeFormStepBodyState();
 }
 
 class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
-  final GlobalKey<FormState> formKey;
-  final FormValue<String> visitTypeSelection;
+  FocusNode initialFocus;
 
-  _VisitTypeFormStepBodyState({
-    @required this.formKey,
-    @required this.visitTypeSelection,
-  })  : assert(formKey != null),
-        assert(visitTypeSelection != null);
+  @override
+  void initState() {
+    super.initState();
+    initialFocus = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    initialFocus.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    initialFocus.requestFocus();
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           Row(
@@ -54,13 +57,14 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
               Expanded(
                 child: InputDecorator(
                   decoration: InputDecoration(
-                      labelText: visitTypeSelection.value != null ? "visit.dart type" : null,
+                      labelText: widget.visitTypeSelection.value != null ? "Visit type" : null,
                       border: const OutlineInputBorder(),
                       contentPadding: const EdgeInsets.only(left: 10)),
                   child: Container(
                     child: DropdownButtonHideUnderline(
                       child: DropdownButtonFormField<String>(
-                        value: visitTypeSelection.value,
+                        value: widget.visitTypeSelection.value,
+                        focusNode: initialFocus,
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
                         elevation: 16,
@@ -68,7 +72,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
                         hint: const Text("Please select a visit type..."),
                         onChanged: (String newValue) {
                           setState(() {
-                            visitTypeSelection.value = newValue;
+                            widget.visitTypeSelection.value = newValue;
                           });
                         },
                         items: <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((String value) {

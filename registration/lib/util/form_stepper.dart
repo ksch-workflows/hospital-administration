@@ -178,31 +178,43 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-      child: Row(
-        children: [
-          RaisedButton(
-            child: Text("Back"),
-            onPressed: onBack,
-          ),
-          Expanded(
-            child: Container(),
-          ),
-          RaisedButton(
-            child: Text("Cancel"),
-            onPressed: onCancel,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          RaisedButton(
-            color: Theme.of(context).accentColor,
-            child: Text(
-              isLastStep ? "Save" : "Continue",
-              style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+      child: FocusTraversalGroup(
+        policy: OrderedTraversalPolicy(),
+        child: Row(
+          children: [
+            FocusTraversalOrder(
+              order: NumericFocusOrder(2),
+              child: RaisedButton(
+                child: Text("Back"),
+                onPressed: onBack,
+              ),
             ),
-            onPressed: onContinue,
-          ),
-        ],
+            Expanded(
+              child: Container(),
+            ),
+            FocusTraversalOrder(
+              order: NumericFocusOrder(3),
+              child: RaisedButton(
+                child: Text("Cancel"),
+                onPressed: onCancel,
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            FocusTraversalOrder(
+              order: NumericFocusOrder(1),
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                child: Text(
+                  isLastStep ? "Save" : "Continue",
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+                ),
+                onPressed: onContinue,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
