@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
-import "package:registration/test_bench.dart";
+import 'package:registration/util/test_bench.dart';
 import 'package:registration/ui/register_patient/register_patient_page.dart';
 
 void main() {

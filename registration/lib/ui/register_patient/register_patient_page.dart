@@ -39,7 +39,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           showDialog(
               context: context,
               builder: (BuildContext context) {
-                return RegisterPatientDialog();
+                return RegisterPatientDialog(onDialogClose: () => Navigator.pop(context));
               });
         },
         tooltip: "Add new patient",

@@ -8,6 +8,12 @@ import 'package:registration/util/form_value.dart';
 import 'package:registration/util/singleton_bucket.dart';
 
 class RegisterPatientDialog extends StatefulWidget {
+  final VoidCallback onDialogClose;
+
+  RegisterPatientDialog({
+    @required this.onDialogClose,
+  }) : assert(onDialogClose != null);
+
   @override
   State<StatefulWidget> createState() => _RegisterPatientDialogState();
 }
@@ -51,9 +57,15 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
           constraints: BoxConstraints.tight(Size(800, 400)),
           child: FormStepper(
             steps: _steps,
+            onCancel: resetFormModel,
           ),
         ),
       ],
     );
+  }
+
+  void resetFormModel() {
+    SingletonBucket.reset<_RegisterPatientDialogModel>();
+    widget.onDialogClose();
   }
 }

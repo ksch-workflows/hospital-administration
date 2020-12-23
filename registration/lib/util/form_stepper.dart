@@ -17,8 +17,13 @@ abstract class FormStep {
 /// - https://flutter.dev/docs/cookbook/forms
 class FormStepper extends StatefulWidget {
   final List<FormStep> steps;
+  final Function onCancel;
 
-  FormStepper({@required this.steps}) : assert(steps != null);
+  FormStepper({
+    @required this.steps,
+    @required this.onCancel,
+  })  : assert(steps != null),
+        assert(onCancel != null);
 
   @override
   _FormStepperState createState() => _FormStepperState();
@@ -76,7 +81,9 @@ class _FormStepperState extends State<FormStepper> {
     }
   }
 
-  void onCancel() {}
+  void onCancel() {
+    widget.onCancel();
+  }
 
   void onContinue() {
     if (!currentStep.validate()) {
