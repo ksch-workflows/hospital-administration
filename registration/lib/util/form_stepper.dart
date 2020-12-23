@@ -12,16 +12,28 @@ abstract class FormStep {
   bool validate();
 }
 
+/// Provides access on the values of radio buttons, switches, checkboxes, etc.
+///
+/// References
+/// - https://api.flutter.dev/flutter/material/Checkbox-class.html
+/// - https://api.flutter.dev/flutter/material/Switch-class.html
+/// - https://api.flutter.dev/flutter/material/Radio-class.html
+class FormValue<T> {
+  T value;
+}
+
 /// References
 /// - https://material.io/archive/guidelines/components/steppers.html#
 /// - https://flutter.dev/docs/cookbook/forms
 class FormStepper extends StatefulWidget {
   final List<FormStep> steps;
   final Function onCancel;
+  final Function onSave;
 
   FormStepper({
     @required this.steps,
     @required this.onCancel,
+    @required this.onSave,
   })  : assert(steps != null),
         assert(onCancel != null);
 
@@ -64,10 +76,13 @@ class _FormStepperState extends State<FormStepper> {
           onBack: onBack,
           onCancel: onCancel,
           onContinue: onContinue,
+          isLastStep: isLastStep(),
         ),
       ],
     );
   }
+
+  bool isLastStep() => currentIndex == widget.steps.length - 1;
 
   void onBack() {
     if (!currentStep.validate()) {
@@ -89,7 +104,10 @@ class _FormStepperState extends State<FormStepper> {
     if (!currentStep.validate()) {
       return;
     }
-    if (currentIndex < widget.steps.length - 1) {
+    if (isLastStep()) {
+      widget.onSave();
+    }
+    else {
       setState(() {
         currentIndex++;
         currentStep = widget.steps[currentIndex];
@@ -145,9 +163,14 @@ class _ActionButtons extends StatelessWidget {
   final Function onBack;
   final Function onCancel;
   final Function onContinue;
+  final bool isLastStep;
 
-  _ActionButtons({@required this.onBack, @required this.onCancel, @required this.onContinue})
-      : assert(onBack != null),
+  _ActionButtons({
+    @required this.onBack,
+    @required this.onCancel,
+    @required this.onContinue,
+    this.isLastStep = false,
+  })  : assert(onBack != null),
         assert(onCancel != null),
         assert(onContinue != null);
 
@@ -174,7 +197,7 @@ class _ActionButtons extends StatelessWidget {
           RaisedButton(
             color: Theme.of(context).accentColor,
             child: Text(
-              "Continue",
+              isLastStep ? "Save" : "Continue",
               style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
             ),
             onPressed: onContinue,

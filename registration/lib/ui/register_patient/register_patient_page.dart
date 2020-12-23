@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
-import 'package:registration/core/models/patient.dart';
+import 'package:get_it/get_it.dart';
+import 'package:registration/core/patient/patient.dart';
+import 'package:registration/core/patient/patient_service.dart';
+import 'package:registration/core/visit/visit_service.dart';
 import 'package:registration/ui/dashboard/dashboard.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
@@ -14,6 +17,8 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient> matchingPatients;
 
   final ScrollController scrollController = ScrollController();
+  final PatientService patientService = GetIt.I<PatientService>();
+  final VisitService visitService = GetIt.I<VisitService>();
 
   @override
   void initState() {
@@ -35,12 +40,23 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
+        onPressed: () async {
+          RegisterPatientResult result = await showDialog(
               context: context,
               builder: (BuildContext context) {
-                return RegisterPatientDialog(onDialogClose: () => Navigator.pop(context));
+                return RegisterPatientDialog(
+                  onDialogClose: (RegisterPatientResult result) => Navigator.pop(context, result),
+                );
               });
+
+          if (result != null) {
+            var createdPatient = patientService.create(result.patient);
+            visitService.startVisit(createdPatient.id);
+
+            // Start visit
+            // Open patient details page
+            print("Patient created: ${createdPatient.id}");
+          }
         },
         tooltip: "Add new patient",
         child: const Icon(Icons.add),
@@ -126,8 +142,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   if (normalizedValue.isEmpty) {
                     matchingPatients = null;
                   } else {
-                    matchingPatients =
-                        kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                    matchingPatients = patientService.find(normalizedValue);
                   }
                 });
               },

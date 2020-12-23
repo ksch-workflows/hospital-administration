@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:registration/util/form_stepper.dart';
-import 'package:registration/util/form_value.dart';
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
@@ -9,7 +8,7 @@ class VisitTypeFormStep implements FormStep {
   VisitTypeFormStep({this.visitTypeSelection});
 
   @override
-  String get title => "Visit type";
+  String get title => "visit.dart type";
 
   @override
   bool validate() => _formKey.currentState.validate();
@@ -55,7 +54,7 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
               Expanded(
                 child: InputDecorator(
                   decoration: InputDecoration(
-                      labelText: visitTypeSelection.value != null ? "Visit type" : null,
+                      labelText: visitTypeSelection.value != null ? "visit.dart type" : null,
                       border: const OutlineInputBorder(),
                       contentPadding: const EdgeInsets.only(left: 10)),
                   child: Container(

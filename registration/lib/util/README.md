@@ -1,3 +1,4 @@
-# Shared Utilities
+# Util module
 
-This which could potentially split out as open source projects.
+The "util" module contains parts of the registration app which could _potentially_ be split out as separate
+open source projects.

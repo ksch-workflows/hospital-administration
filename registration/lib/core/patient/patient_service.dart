@@ -1,22 +1,39 @@
-import "package:uuid/uuid.dart";
+import 'package:registration/core/patient/patient.dart';
+import 'package:uuid/uuid.dart';
 
-class Patient {
-  final String id;
-  final String opdNumber;
-  final String name;
-  final String location;
-  final DateTime lastVisit;
+int _nextOptNumberSuffix = 9000;
 
-  Patient({
-    this.id,
-    this.opdNumber,
-    this.name,
-    this.location,
-    this.lastVisit,
-  });
+abstract class PatientService {
+  Patient create(Patient patient);
+  Patient get(String patientId);
+  List<Patient> find(String patientName);
 }
 
-final List<Patient> kAllPatients = [
+class MockPatientService implements PatientService {
+  @override
+  Patient create(Patient patient) {
+    var result = Patient(
+      id: Uuid().v4(),
+      name: patient.name,
+      opdNumber: "20-${_nextOptNumberSuffix++}",
+      location: patient.location,
+    );
+    _mockPatientRepository.add(result);
+    return result;
+  }
+
+  @override
+  Patient get(String patientId) {
+    return _mockPatientRepository.where((element) => element.id == patientId).first;
+  }
+
+  @override
+  List<Patient> find(String patientName) {
+    return _mockPatientRepository.where((patient) => patient.name.toLowerCase().contains(patientName)).toList();
+  }
+}
+
+final List<Patient> _mockPatientRepository = [
   Patient(
     id: Uuid().v4().toString(),
     opdNumber: "10-1102",

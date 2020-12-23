@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:registration/core/patient/patient.dart';
 import 'package:registration/ui/register_patient/register_patient_dialog/contact_information.dart';
 import 'package:registration/ui/register_patient/register_patient_dialog/personal_data.dart';
 import 'package:registration/ui/register_patient/register_patient_dialog/visit_type.dart';
 
 import 'package:registration/util/form_stepper.dart';
-import 'package:registration/util/form_value.dart';
 import 'package:registration/util/singleton_bucket.dart';
 
+class RegisterPatientResult {
+  final Patient patient;
+  final String visitType;
+
+  RegisterPatientResult({
+    @required this.patient,
+    @required this.visitType,
+  })  : assert(patient != null),
+        assert(visitType != null);
+}
+
 class RegisterPatientDialog extends StatefulWidget {
-  final VoidCallback onDialogClose;
+  final Function onDialogClose;
 
   RegisterPatientDialog({
     @required this.onDialogClose,
@@ -57,15 +68,31 @@ class _RegisterPatientDialogState extends State<RegisterPatientDialog> {
           constraints: BoxConstraints.tight(Size(800, 400)),
           child: FormStepper(
             steps: _steps,
-            onCancel: resetFormModel,
+            onCancel: cancel,
+            onSave: save,
           ),
         ),
       ],
     );
   }
 
-  void resetFormModel() {
+  void save() {
+    var newPatient = Patient(
+      name: _model.nameController.text,
+      fatherName: _model.fatherNameController.text,
+      location: _model.locationController.text,
+    );
+    var result = RegisterPatientResult(
+      patient: newPatient,
+      visitType: _model.visitTypeSelection.value,
+    );
+
     SingletonBucket.reset<_RegisterPatientDialogModel>();
-    widget.onDialogClose();
+    widget.onDialogClose(result);
+  }
+
+  void cancel() {
+    SingletonBucket.reset<_RegisterPatientDialogModel>();
+    widget.onDialogClose(null);
   }
 }
