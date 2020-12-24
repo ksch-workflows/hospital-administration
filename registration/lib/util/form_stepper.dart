@@ -184,9 +184,12 @@ class _ActionButtons extends StatelessWidget {
           children: [
             FocusTraversalOrder(
               order: NumericFocusOrder(2),
-              child: RaisedButton(
-                child: Text("Back"),
-                onPressed: onBack,
+              child: Tooltip(
+                message: "Go back to the previous step.",
+                child: RaisedButton(
+                  child: Text("Back"),
+                  onPressed: onBack,
+                ),
               ),
             ),
             Expanded(
@@ -204,13 +207,16 @@ class _ActionButtons extends StatelessWidget {
             ),
             FocusTraversalOrder(
               order: NumericFocusOrder(1),
-              child: RaisedButton(
-                color: Theme.of(context).accentColor,
-                child: Text(
-                  isLastStep ? "Save" : "Continue",
-                  style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+              child: Tooltip(
+                message: "Go to the next step.",
+                child: RaisedButton(
+                  color: Theme.of(context).accentColor,
+                  child: Text(
+                    isLastStep ? "Save" : "Continue",
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSecondary),
+                  ),
+                  onPressed: onContinue,
                 ),
-                onPressed: onContinue,
               ),
             ),
           ],

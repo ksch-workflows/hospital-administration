@@ -1,3 +1,5 @@
+// TODO Maybe this can be replaced with GetIt?
+
 /// Enables to temporarily discard dialogs and then resume the editing.
 class SingletonBucket {
 
