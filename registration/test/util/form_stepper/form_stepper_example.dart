@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:registration/util/form_stepper.dart';
+import 'package:registration/util/test_bench.dart';
+
+void main() {
+  runApp(
+    TestBench(
+      child: ExampleStepper(),
+      isFullPage: false,
+    ),
+  );
+}
 
 class ExampleStepper extends StatefulWidget {
   final TextEditingController firstStepInputController = TextEditingController();
@@ -11,7 +21,7 @@ class ExampleStepper extends StatefulWidget {
 }
 
 class _ExampleStepperState extends State<ExampleStepper> {
-  List<FormStep> steps;
+  List<FormStep> steps = [];
 
   @override
   void initState() {
@@ -19,6 +29,8 @@ class _ExampleStepperState extends State<ExampleStepper> {
 
     steps = [
       _FirstStep(widget.firstStepInputController),
+      _SecondStep(widget.secondStepInputController),
+      _ThirdStep(widget.thirdStepInputController),
     ];
   }
 
@@ -55,38 +67,53 @@ class _FirstStep implements FormStep {
   String get title => "First step";
 
   @override
-  bool validate() => formKey.currentState.validate();
+  bool validate() => true;
 }
 
-class _FirstForm extends StatelessWidget {
-  final TextEditingController firstStepInputController;
-
-  _FirstForm(this.firstStepInputController);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class _SecondForm extends StatelessWidget {
+class _SecondStep implements FormStep {
+  final formKey = GlobalKey<FormState>();
   final TextEditingController secondStepInputController;
 
-  _SecondForm(this.secondStepInputController);
+  _SecondStep(this.secondStepInputController);
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget get body {
+    return Form(
+      key: formKey,
+      child: TextFormField(
+        key: ValueKey("secondStepInput"),
+        controller: secondStepInputController,
+      ),
+    );
   }
+
+  @override
+  String get title => "Second step";
+
+  @override
+  bool validate() => true;
 }
 
-class _ThirdForm extends StatelessWidget {
+class _ThirdStep implements FormStep {
+  final formKey = GlobalKey<FormState>();
   final TextEditingController thirdStepInputController;
 
-  _ThirdForm(this.thirdStepInputController);
+  _ThirdStep(this.thirdStepInputController);
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget get body {
+    return Form(
+      key: formKey,
+      child: TextFormField(
+        key: ValueKey("thirdStepInput"),
+        controller: thirdStepInputController,
+      ),
+    );
   }
+
+  @override
+  String get title => "Third step";
+
+  @override
+  bool validate() => true;
 }

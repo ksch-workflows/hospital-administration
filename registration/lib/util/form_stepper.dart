@@ -210,6 +210,7 @@ class _ActionButtons extends StatelessWidget {
               child: Tooltip(
                 message: "Go to the next step.",
                 child: RaisedButton(
+                  key: ValueKey("continueButton"),
                   color: Theme.of(context).accentColor,
                   child: Text(
                     isLastStep ? "Save" : "Continue",
