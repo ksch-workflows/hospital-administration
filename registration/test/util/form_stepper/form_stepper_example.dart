@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:registration/util/form_stepper.dart';
 import 'package:registration/util/test_bench.dart';
 
+// Start via commandline: flutter run -d chrome test/util/form_stepper/form_stepper_example.dart
 void main() {
   runApp(
     TestBench(
       child: ExampleStepper(),
-      isFullPage: false,
     ),
   );
 }
@@ -16,9 +16,14 @@ class ExampleStepper extends StatefulWidget {
   final TextEditingController secondStepInputController = TextEditingController();
   final TextEditingController thirdStepInputController = TextEditingController();
 
+  final Function onCancel;
+
+  ExampleStepper({this.onCancel});
+
   @override
   _ExampleStepperState createState() => _ExampleStepperState();
 }
+
 
 class _ExampleStepperState extends State<ExampleStepper> {
   List<FormStep> steps = [];
@@ -36,7 +41,8 @@ class _ExampleStepperState extends State<ExampleStepper> {
 
   @override
   Widget build(BuildContext context) {
-    return FormStepper(steps: steps, onCancel: () => {}, onSave: () => {});
+    Function onCancel = widget.onCancel != null ? widget.onCancel : () => {};
+    return FormStepper(steps: steps, onCancel: onCancel, onSave: () => {});
   }
 }
 

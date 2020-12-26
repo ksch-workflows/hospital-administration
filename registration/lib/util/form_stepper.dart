@@ -187,6 +187,7 @@ class _ActionButtons extends StatelessWidget {
               child: Tooltip(
                 message: "Go back to the previous step.",
                 child: RaisedButton(
+                  key: ValueKey("backButton"),
                   child: Text("Back"),
                   onPressed: onBack,
                 ),
@@ -198,6 +199,7 @@ class _ActionButtons extends StatelessWidget {
             FocusTraversalOrder(
               order: NumericFocusOrder(3),
               child: RaisedButton(
+                key: ValueKey("cancelButton"),
                 child: Text("Cancel"),
                 onPressed: onCancel,
               ),
