@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:registration/util/test_bench.dart';
-import 'package:mockito/mockito.dart';
 
 import 'form_stepper_example.dart';
 
@@ -12,7 +10,6 @@ void main() {
     await tester.open(exampleStepper);
 
     var firstStepInputField = find.byKey(ValueKey("firstStepInput"));
-    expect(firstStepInputField, findsOneWidget);
     await tester.enterText(firstStepInputField, "John Doe");
     await tester.pump();
 
@@ -24,17 +21,17 @@ void main() {
 
     await goToNextStep(tester);
 
-    assertSecondPage(tester);
+    expectOnSecondPage(tester);
   });
 
   testWidgets("Should go to previous step", (WidgetTester tester) async {
     await tester.open(ExampleStepper());
     await goToNextStep(tester);
-    assertSecondPage(tester);
+    expectOnSecondPage(tester);
 
     await goToPreviousStep(tester);
 
-    assertFirstPage(tester);
+    expectOnFirstPage(tester);
   });
 
   testWidgets("Should cancel stepper", (WidgetTester tester) async {
@@ -48,6 +45,18 @@ void main() {
 
     expect(canceledHasBeenCalled, isTrue);
   });
+
+  testWidgets("Should validate form before going to the next step", (WidgetTester tester) async {
+    await tester.open(ExampleStepper());
+
+    var firstStepInputField = find.byKey(ValueKey("firstStepInput"));
+    await tester.enterText(firstStepInputField, "");
+    await goToNextStep(tester);
+
+    expect(find.text("The input for the first step is mandatory."), findsOneWidget);
+  });
+  
+  
 }
 
 Future goToNextStep(WidgetTester tester) async {
@@ -66,7 +75,7 @@ Future goToPreviousStep(WidgetTester tester) async {
   await tester.pump();
 }
 
-void assertFirstPage(WidgetTester tester) {
+void expectOnFirstPage(WidgetTester tester) {
   var inputField = find.byKey(ValueKey("firstStepInput"));
   expect(inputField, findsOneWidget);
 
@@ -74,7 +83,7 @@ void assertFirstPage(WidgetTester tester) {
   expect(secondStepInputField, findsNothing);
 }
 
-void assertSecondPage(WidgetTester tester) {
+void expectOnSecondPage(WidgetTester tester) {
   var inputField = find.byKey(ValueKey("secondStepInput"));
   expect(inputField, findsOneWidget);
 

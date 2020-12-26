@@ -73,7 +73,7 @@ class _FirstStep implements FormStep {
   String get title => "First step";
 
   @override
-  bool validate() => true;
+  bool validate() => formKey.currentState.validate();
 }
 
 class _SecondStep implements FormStep {
