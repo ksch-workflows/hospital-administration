@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:registration/util/form_stepper.dart';
+import "package:flutter/material.dart";
+
+import "../../../util/form_stepper.dart";
 
 class ContactInformationFormStep implements FormStep {
   final formKey = GlobalKey<FormState>();
@@ -54,23 +55,24 @@ class _ContactInformationFormState extends State<_ContactInformationForm> {
     return Form(
       key: widget.formKey,
       child: Column(children: <Widget>[
-        TextFormField(
-          controller: widget.locationController,
-          focusNode: initialFocus,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "The patient's location is required information.";
-            }
-            return null;
+      TextFormField(
+      controller: widget.locationController,
+        focusNode: initialFocus,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "The patient's location is required information.";
+          }
+          return null;
           },
-          decoration: InputDecoration(
+        decoration: InputDecoration(
             labelText: "Patient's location*",
             border: const OutlineInputBorder(),
-            hintText: "Please enter the patient's location",
-            helperText: "* Required",
-          ),
-        ),
-      ]),
+        hintText: "Please enter the patient's location",
+        helperText: "* Required",
+      ),
+    ),]
+    )
+    ,
     );
   }
 }

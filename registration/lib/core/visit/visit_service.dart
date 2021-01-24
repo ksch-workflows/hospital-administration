@@ -2,6 +2,7 @@ import "package:uuid/uuid.dart";
 
 import "visit.dart";
 
+// ignore: one_member_abstracts
 abstract class VisitService {
   Visit startVisit(String patientId);
 }

@@ -43,11 +43,11 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           searchTermController.clear();
-          RegisterPatientResult result = await showDialog(
+          var result = await showDialog(
               context: context,
-              builder: (BuildContext context) {
+              builder: (context) {
                 return RegisterPatientDialog(
-                  onDialogClose: (RegisterPatientResult result) => Navigator.pop(context, result),
+                  onDialogClose: (result) => Navigator.pop(context, result),
                 );
               });
           if (result != null) {

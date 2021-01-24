@@ -131,8 +131,8 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> stepTitleWidgets = [];
-    for (int i = 0; i < stepTitles.length; i++) {
+    var stepTitleWidgets = <Widget>[];
+    for (var i = 0; i < stepTitles.length; i++) {
       Widget stepTitleWidget = Row(
         children: [
           i == currentStep ? _ActiveIndexBubble(i) : _InactiveIndexBubble(i),
