@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:registration/util/form_stepper.dart';
+import "package:flutter/material.dart";
+
+import "../../../util/form_stepper.dart";
 
 class VisitTypeFormStep implements FormStep {
   final _formKey = GlobalKey<FormState>();
@@ -70,12 +71,12 @@ class _VisitTypeFormStepBodyState extends State<_VisitTypeFormStepBody> {
                         elevation: 16,
                         style: const TextStyle(color: Colors.deepPurple),
                         hint: const Text("Please select a visit type..."),
-                        onChanged: (String newValue) {
+                        onChanged: (newValue) {
                           setState(() {
                             widget.visitTypeSelection.value = newValue;
                           });
                         },
-                        items: <String>['OPD', 'IPD'].map<DropdownMenuItem<String>>((String value) {
+                        items: <String>["OPD", "IPD"].map<DropdownMenuItem<String>>((value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
