@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:registration/ui/dashboard/dashboard.dart';
-import 'package:registration/routing.dart';
-import 'package:registration/util/test_bench.dart';
+import "package:flutter/material.dart";
+
+import "routing.dart";
+import "ui/dashboard/dashboard.dart";
+import "util/test_bench.dart";
 
 class WebScaffold extends StatelessWidget {
   final String title;
@@ -160,7 +161,7 @@ void main() {
         title: "Hello",
         body: Row(
           children: [
-            const Text('Hello, Test Bench!'),
+            const Text("Hello, Test Bench!"),
           ],
         ),
       ),

@@ -1,5 +1,5 @@
-import 'package:registration/util/form_stepper.dart';
-import 'package:registration/util/singleton_bucket.dart';
+import "package:registration/util/form_stepper.dart";
+import "package:registration/util/singleton_bucket.dart";
 import "package:test/test.dart";
 
 void main() {

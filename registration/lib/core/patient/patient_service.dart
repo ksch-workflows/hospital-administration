@@ -1,5 +1,6 @@
-import 'package:registration/core/patient/patient.dart';
-import 'package:uuid/uuid.dart';
+import "package:uuid/uuid.dart";
+
+import "patient.dart";
 
 int _nextOptNumberSuffix = 9000;
 

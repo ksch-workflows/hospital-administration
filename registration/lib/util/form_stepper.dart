@@ -6,7 +6,6 @@ import 'package:flutter/rendering.dart';
 abstract class FormStep {
   String get title;
 
-  /// see
   Widget get body;
 
   bool validate();

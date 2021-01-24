@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:registration/util/form_stepper.dart';
-import 'package:registration/util/test_bench.dart';
+import "package:flutter/material.dart";
+import "package:registration/util/form_stepper.dart";
+import "package:registration/util/test_bench.dart";
 
 // Start via commandline: flutter run -d chrome test/util/form_stepper/form_stepper_example.dart
 void main() {
@@ -41,7 +41,7 @@ class _ExampleStepperState extends State<ExampleStepper> {
 
   @override
   Widget build(BuildContext context) {
-    Function onCancel = widget.onCancel != null ? widget.onCancel : () => {};
+    var onCancel = widget.onCancel != null ? widget.onCancel : () => {};
     return FormStepper(steps: steps, onCancel: onCancel, onSave: () => {});
   }
 }

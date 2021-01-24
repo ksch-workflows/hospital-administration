@@ -1,10 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter_test/flutter_test.dart";
-import 'package:registration/util/test_bench.dart';
-import 'package:registration/ui/register_patient/register_patient_page.dart';
+import "package:registration/util/test_bench.dart";
+import "package:registration/ui/register_patient/register_patient_page.dart";
 
 void main() {
-  testWidgets("Should show search results", (WidgetTester tester) async {
+  testWidgets("Should show search results", (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -19,7 +19,7 @@ void main() {
     expect(find.byType(DataTable), findsOneWidget);
   });
 
-  testWidgets("Should not show search result table before the search", (WidgetTester tester) async {
+  testWidgets("Should not show search result table before the search", (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(
@@ -30,7 +30,7 @@ void main() {
     expect(find.byType(DataTable), findsNothing);
   });
 
-  testWidgets("Should show message about no search results", (WidgetTester tester) async {
+  testWidgets("Should show message about no search results", (tester) async {
     tester.binding.window.textScaleFactorTestValue = 0.2;
 
     await tester.pumpWidget(TestBench(

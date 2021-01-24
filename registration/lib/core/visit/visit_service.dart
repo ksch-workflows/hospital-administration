@@ -1,5 +1,6 @@
-import 'package:registration/core/visit/visit.dart';
-import 'package:uuid/uuid.dart';
+import "package:uuid/uuid.dart";
+
+import "visit.dart";
 
 abstract class VisitService {
   Visit startVisit(String patientId);

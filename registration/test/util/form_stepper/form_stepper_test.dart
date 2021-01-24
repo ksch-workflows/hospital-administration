@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:registration/util/test_bench.dart';
+import "package:flutter/material.dart";
+import "package:flutter_test/flutter_test.dart";
+import "package:registration/util/test_bench.dart";
 
-import 'form_stepper_example.dart';
+import "form_stepper_example.dart";
 
 void main() {
-  testWidgets("Should allow to enter text for the first step", (WidgetTester tester) async {
+  testWidgets("Should allow to enter text for the first step", (tester) async {
     var exampleStepper = ExampleStepper();
     await tester.open(exampleStepper);
 
@@ -16,7 +16,7 @@ void main() {
     expect(exampleStepper.firstStepInputController.text, equals("John Doe"));
   });
 
-  testWidgets("Should go to next step", (WidgetTester tester) async {
+  testWidgets("Should go to next step", (tester) async {
     await tester.open(ExampleStepper());
 
     await goToNextStep(tester);
@@ -24,7 +24,7 @@ void main() {
     expectOnSecondPage(tester);
   });
 
-  testWidgets("Should go to previous step", (WidgetTester tester) async {
+  testWidgets("Should go to previous step", (tester) async {
     await tester.open(ExampleStepper());
     await goToNextStep(tester);
     expectOnSecondPage(tester);
@@ -34,8 +34,8 @@ void main() {
     expectOnFirstPage(tester);
   });
 
-  testWidgets("Should cancel stepper", (WidgetTester tester) async {
-    bool canceledHasBeenCalled = false;
+  testWidgets("Should cancel stepper", (tester) async {
+    var canceledHasBeenCalled = false;
     await tester.open(ExampleStepper(
       onCancel: () => canceledHasBeenCalled = true,
     ));
@@ -46,7 +46,7 @@ void main() {
     expect(canceledHasBeenCalled, isTrue);
   });
 
-  testWidgets("Should validate form before going to the next step", (WidgetTester tester) async {
+  testWidgets("Should validate form before going to the next step", (tester) async {
     await tester.open(ExampleStepper());
 
     var firstStepInputField = find.byKey(ValueKey("firstStepInput"));
@@ -55,8 +55,6 @@ void main() {
 
     expect(find.text("The input for the first step is mandatory."), findsOneWidget);
   });
-  
-  
 }
 
 Future goToNextStep(WidgetTester tester) async {
@@ -93,8 +91,8 @@ void expectOnSecondPage(WidgetTester tester) {
 
 extension WidgetTesterExtensions on WidgetTester {
   Future open(Widget widgetUnderTest) async {
-    this.binding.window.textScaleFactorTestValue = 0.2; // Workaround to avoid pixel overflow errors
-    return this.pumpWidget(TestBench(
+    binding.window.textScaleFactorTestValue = 0.2; // Workaround to avoid pixel overflow errors
+    return pumpWidget(TestBench(
       child: widgetUnderTest,
     ));
   }
