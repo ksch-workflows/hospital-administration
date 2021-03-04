@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:registration/dashboard.dart';
-import 'package:registration/routing.dart';
-import 'package:registration/test_bench.dart';
+import "package:flutter/material.dart";
+
+import "routing.dart";
+import "ui/dashboard/dashboard.dart";
+import "util/test_bench.dart";
 
 class WebScaffold extends StatelessWidget {
   final String title;
@@ -157,9 +158,10 @@ void main() {
   runApp(
     TestBench(
       child: WebScaffold(
+        title: "Hello",
         body: Row(
           children: [
-            const Text('Hello, Test Bench!'),
+            const Text("Hello, Test Bench!"),
           ],
         ),
       ),

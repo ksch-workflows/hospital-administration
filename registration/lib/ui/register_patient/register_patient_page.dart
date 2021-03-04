@@ -1,9 +1,12 @@
 import "package:flutter/material.dart";
-import 'package:registration/dashboard.dart';
-import "package:registration/register_patient/model/patient.dart";
+import 'package:get_it/get_it.dart';
+import 'package:registration/core/patient/patient.dart';
+import 'package:registration/core/patient/patient_service.dart';
+import 'package:registration/core/visit/visit_service.dart';
+import 'package:registration/ui/dashboard/dashboard.dart';
 import 'package:registration/routing.dart';
 import 'package:registration/scaffold.dart';
-import "package:registration/test_bench.dart";
+import 'package:registration/ui/register_patient/register_patient_dialog/dialog.dart';
 
 class RegisterPatientPage extends StatefulWidget {
   @override
@@ -14,6 +17,14 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
   List<Patient> matchingPatients;
 
   final ScrollController scrollController = ScrollController();
+  final TextEditingController searchTermController = TextEditingController();
+  final PatientService patientService = GetIt.I<PatientService>();
+  final VisitService visitService = GetIt.I<VisitService>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +41,21 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
         Navigator.push(context, WebPageRoute(builder: (context) => RegistrationDashboard()));
       },
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          searchTermController.clear();
+          var result = await showDialog(
+              context: context,
+              builder: (context) {
+                return RegisterPatientDialog(
+                  onDialogClose: (result) => Navigator.pop(context, result),
+                );
+              });
+          if (result != null) {
+            var createdPatient = patientService.create(result.patient);
+            visitService.startVisit(createdPatient.id);
+            print("Patient created: ${createdPatient.id}");
+          }
+        },
         tooltip: "Add new patient",
         child: const Icon(Icons.add),
       ),
@@ -102,6 +127,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
           child: Container(
             width: 200,
             child: TextField(
+              controller: searchTermController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 hintText: "Search patient...",
@@ -115,8 +141,7 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
                   if (normalizedValue.isEmpty) {
                     matchingPatients = null;
                   } else {
-                    matchingPatients =
-                        kAllPatients.where((patient) => patient.name.toLowerCase().contains(normalizedValue)).toList();
+                    matchingPatients = patientService.find(normalizedValue);
                   }
                 });
               },
@@ -127,13 +152,4 @@ class _RegisterPatientPageState extends State<RegisterPatientPage> {
       ],
     );
   }
-}
-
-void main() {
-  runApp(
-    TestBench(
-      child: RegisterPatientPage(),
-      isFullPage: true,
-    ),
-  );
 }
