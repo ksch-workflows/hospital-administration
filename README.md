@@ -1,3 +1,5 @@
+This project is superseeded by https://github.com/ksch-workflows/administration
+
 # Hospital Administration
 
 The purpose of this project is to support the administrative work in the [Kirpal Sagar Charitable Hospital](https://kirpal-sagar.org/en/kirpal-charitable-hospital-en/).
